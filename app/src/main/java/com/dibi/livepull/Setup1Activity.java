@@ -37,6 +37,7 @@ public class Setup1Activity extends AppCompatActivity {
     static  String pull__0 = "rtmp://119.131.176.169/live/test2";
     static  String pull__1 = "rtmp://live.hkstv.hk.lxdns.com/live/hks";
     static  String pull__2 = "rtmp://live.hkstv.hk.lxdns.com/live/hks";
+    static  String pull__2444 = "rtmp://live.hkstv.hk.lxdns.com/live/hks";
 
     /*
     <EditText
