@@ -22,6 +22,7 @@ import tv.danmaku.ijk.media.player.IMediaPlayer;
 public class MyIjkVideoView extends RelativeLayout {
 
 
+    boolean isPause = false;
     IjkVideoView ijkplayer;
     ProgressBar progressbar;
     public static final String TAG = "MyIjkVideoView";
@@ -110,6 +111,21 @@ public class MyIjkVideoView extends RelativeLayout {
             }
         });
 
+        ijkplayer.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(isPause){
+                    ijkplayer.onResume();
+                    isPause = false;
+                    Log.e("haha", "恢复");
+                }else {
+                    ijkplayer.pause();
+                    isPause = true;
+                    Log.e("haha", "暂停:");
+                }
+            }
+        });
+
     }
 
 
@@ -155,6 +171,8 @@ public class MyIjkVideoView extends RelativeLayout {
     public void SetVolumeListener(VolListener volListener){
         this.mLisenter = volListener;
     }
+
+
 
     public interface VolListener{
         void setVol();

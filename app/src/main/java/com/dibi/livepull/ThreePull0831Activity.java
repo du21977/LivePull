@@ -1,8 +1,8 @@
 package com.dibi.livepull;
 
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -13,30 +13,43 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.dibi.livepull.bean.AllUrlBean;
+import com.dibi.livepull.bean.DefaultApiBean;
 import com.dibi.livepull.view.MyIjkVideoView;
 import com.dibi.livepull.view.OnDoubleClickListener;
 import com.dingmouren.layoutmanagergroup.viewpager.OnViewPagerListener;
 import com.dingmouren.layoutmanagergroup.viewpager.ViewPagerLayoutManager;
+import com.google.gson.Gson;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ThreePull22Activity extends AppCompatActivity {
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
+import static com.dibi.livepull.R.id.ijkplayer;
+
+public class ThreePull0831Activity extends AppCompatActivity {
 
     private static final String TAG = "RecycleView--item" ;
     RecyclerView mRecyclerView;
     private ViewPagerLayoutManager mLayoutManager;
+    private AllUrlBean allUrlBean;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_three_pull22);
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview);
-        mLayoutManager = new ViewPagerLayoutManager(ThreePull22Activity.this, OrientationHelper.HORIZONTAL);
+        mLayoutManager = new ViewPagerLayoutManager(ThreePull0831Activity.this, OrientationHelper.HORIZONTAL);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        MyAdapter myAdapter = new MyAdapter();
-        mRecyclerView.setAdapter(myAdapter);
+
+
 
         mLayoutManager.setOnViewPagerListener(new OnViewPagerListener() {
             @Override
@@ -65,9 +78,46 @@ public class ThreePull22Activity extends AppCompatActivity {
             }
         });
 
+
+        okhttpGet();
+
+    }
+
+    /**
+     * 请求首页默认接口
+     */
+    private void okhttpGet() {
+        OkHttpClient okHttpClient = new OkHttpClient();
+        Request request = new Request.Builder().url("http://192.168.0.131:8090/latui/getAll").build();
+//        Request request = new Request.Builder().url("http://192.168.199.131:8090/latui/defaultApi").build();
+        Call call = okHttpClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                final String result = response.body().string();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.e("ThreePull0831Activity--",result);
+                        allUrlBean = new Gson().fromJson(result,AllUrlBean.class);
+                        if (allUrlBean !=null&& allUrlBean.getData().size()>0){
+                            MyAdapter myAdapter = new MyAdapter();
+                            mRecyclerView.setAdapter(myAdapter);
+                        }
+                    }
+                });
+            }
+        });
+
     }
 
     private void playVideo(int position) {
+        final boolean[] isPause3 = {false};
         //获取第一个可见的item
         View itemView = mRecyclerView.getChildAt(0);
         RelativeLayout rl_item_total = itemView.findViewById(R.id.rl_item_total);
@@ -76,7 +126,7 @@ public class ThreePull22Activity extends AppCompatActivity {
         //在这里搞事情
         // 1.添加左边的播放器
         final RelativeLayout.LayoutParams   layoutParams_left = new RelativeLayout.LayoutParams(dp2px(400), RelativeLayout.LayoutParams.MATCH_PARENT);
-        final MyIjkVideoView[] myIjkVideoView_1 = new MyIjkVideoView[]{new MyIjkVideoView(ThreePull22Activity.this)};
+        final MyIjkVideoView[] myIjkVideoView_1 = new MyIjkVideoView[]{new MyIjkVideoView(ThreePull0831Activity.this)};
         myIjkVideoView_1[0].setBackgroundColor(Color.BLUE);
         myIjkVideoView_1[0].setLayoutParams(layoutParams_left);
 
@@ -84,7 +134,7 @@ public class ThreePull22Activity extends AppCompatActivity {
         final RelativeLayout.LayoutParams layoutParams_right_top = new RelativeLayout.LayoutParams(dp2px(200), dp2px(200));
         layoutParams_right_top.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
         layoutParams_right_top.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-        final MyIjkVideoView[] myIjkVideoView_2 = new MyIjkVideoView[]{new MyIjkVideoView(ThreePull22Activity.this)};
+        final MyIjkVideoView[] myIjkVideoView_2 = new MyIjkVideoView[]{new MyIjkVideoView(ThreePull0831Activity.this)};
         myIjkVideoView_2[0].setBackgroundColor(Color.WHITE);
         myIjkVideoView_2[0].setLayoutParams(layoutParams_right_top);
 
@@ -92,12 +142,12 @@ public class ThreePull22Activity extends AppCompatActivity {
         final RelativeLayout.LayoutParams layoutParams_right_bottom = new RelativeLayout.LayoutParams(dp2px(200), dp2px(200));
         layoutParams_right_bottom.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
         layoutParams_right_bottom.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-        final MyIjkVideoView[] myIjkVideoView_3  = new MyIjkVideoView[]{new MyIjkVideoView(ThreePull22Activity.this)};
+        final MyIjkVideoView[] myIjkVideoView_3  = new MyIjkVideoView[]{new MyIjkVideoView(ThreePull0831Activity.this)};
         myIjkVideoView_3[0].setBackgroundColor(Color.BLACK);
         myIjkVideoView_3[0].setLayoutParams(layoutParams_right_bottom);
 
-        TextView textView1 = new TextView(ThreePull22Activity.this);
-        TextView textView2 = new TextView(ThreePull22Activity.this);
+        TextView textView1 = new TextView(ThreePull0831Activity.this);
+        TextView textView2 = new TextView(ThreePull0831Activity.this);
         textView1.setLayoutParams(layoutParams_right_top);
         textView2.setLayoutParams(layoutParams_right_bottom);
 
@@ -140,13 +190,27 @@ public class ThreePull22Activity extends AppCompatActivity {
                 myIjkVideoView_3[0].setVolume(0.0f,0.0f);
             }
         });
+//        myIjkVideoView_1[0].setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if(isPause3[0]){
+//                    myIjkVideoView_1[0].onResume();
+//                    isPause3[0] = false;
+//                    Log.e("haha", "恢复");
+//                }else {
+//                    myIjkVideoView_1[0].pause();
+//                    isPause3[0] = true;
+//                    Log.e("haha", "暂停:");
+//                }
+//            }
+//        });
 
         textView1.setOnTouchListener(new OnDoubleClickListener(new OnDoubleClickListener.DoubleClickCallback() {
             @Override
             public void onDoubleClick() {
                 //  Toast.makeText(ThreePull2Activity.this,"双击11",Toast.LENGTH_LONG).show();
 
-                MyIjkVideoView myIjkVideoView = new MyIjkVideoView(ThreePull22Activity.this);
+                MyIjkVideoView myIjkVideoView = new MyIjkVideoView(ThreePull0831Activity.this);
                 myIjkVideoView = list.get(0)[0];
                 list.get(0)[0] =list.get(1)[0];
                 list.get(1)[0] = myIjkVideoView;
@@ -166,7 +230,7 @@ public class ThreePull22Activity extends AppCompatActivity {
             @Override
             public void onDoubleClick() {
                 //  Toast.makeText(ThreePull2Activity.this,"双击22",Toast.LENGTH_LONG).show();
-                MyIjkVideoView myIjkVideoView = new MyIjkVideoView(ThreePull22Activity.this);
+                MyIjkVideoView myIjkVideoView = new MyIjkVideoView(ThreePull0831Activity.this);
                 myIjkVideoView = list.get(0)[0];
                 list.get(0)[0] =list.get(2)[0];
                 list.get(2)[0] = myIjkVideoView;
@@ -324,7 +388,8 @@ public class ThreePull22Activity extends AppCompatActivity {
 
         @Override
         public int getItemCount() {
-            return 5;
+            Log.e("----",allUrlBean.getData().size()+"");
+            return allUrlBean.getData().size();
         }
 
         class ViewHolder extends RecyclerView.ViewHolder {

@@ -39,10 +39,12 @@ public class Setup1Activity extends AppCompatActivity {
 
     EditText edit_1;//第一个东西
 
-    static  String pull__0 = "rtmp://119.131.176.169/live/test2";
-    static  String pull__1 = "rtmp://live.hkstv.hk.lxdns.com/live/hks";
-    static  String pull__2 = "rtmp://live.hkstv.hk.lxdns.com/live/hks";
-    static  String pull__2444 = "rtmp://live.hkstv.hk.lxdns.com/live/hks";
+   // static  String pull__0 = "rtmp://119.131.176.169/live/test2";
+   static  String pull__0 = "http://9890.vod.myqcloud.com/9890_4e292f9a3dd011e6b4078980237cc3d3.f20.mp4";
+//    static  String pull__0 = "rtmp://live.hkstv.hk.lxdns.com/live/hks";
+    static  String pull__1 = "rtmp://mobliestream.c3tv.com:554/live/goodtv.sdp";
+    static  String pull__2 = "rtmp://202.69.69.180:443/webcast/bshdlive-pc";
+
     private DefaultApiBean defaultApiBean;
 
     String parames =null;
@@ -205,8 +207,7 @@ public class Setup1Activity extends AppCompatActivity {
             public void onResponse(Call call, Response response) throws IOException {
                 Log.e("POST---success-",""+response.body().string());
 
-
-                startActivity(new Intent(Setup1Activity.this,ThreePull22Activity.class));
+                startActivity(new Intent(Setup1Activity.this,ThreePull0831Activity.class));
             }
         });
     }

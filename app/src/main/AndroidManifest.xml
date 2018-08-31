@@ -36,6 +36,10 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="landscape"
             ></activity>
+        <activity android:name=".ThreePull0831Activity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="landscape"
+            ></activity>
     </application>
 
 </manifest>
