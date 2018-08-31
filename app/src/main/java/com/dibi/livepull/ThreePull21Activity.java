@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
@@ -12,15 +13,21 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import com.dibi.livepull.dialog.MyAlertDialog;
 import com.dibi.livepull.view.MyIjkVideoView;
 import com.dibi.livepull.view.OnDoubleClickListener;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ThreePull2Activity extends AppCompatActivity {
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
+public class ThreePull21Activity extends AppCompatActivity {
 
 
     int left = 0;
@@ -46,7 +53,6 @@ public class ThreePull2Activity extends AppCompatActivity {
 
         //总布局
         RelativeLayout relativeLayout = new RelativeLayout(this);
-
 
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(dp2px(60),dp2px(60));
         layoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
@@ -152,7 +158,7 @@ public class ThreePull2Activity extends AppCompatActivity {
             public void onDoubleClick() {
               //  Toast.makeText(ThreePull2Activity.this,"双击11",Toast.LENGTH_LONG).show();
 
-                MyIjkVideoView myIjkVideoView = new MyIjkVideoView(ThreePull2Activity.this);
+                MyIjkVideoView myIjkVideoView = new MyIjkVideoView(ThreePull21Activity.this);
                 myIjkVideoView = list.get(0)[0];
                 list.get(0)[0] =list.get(1)[0];
                 list.get(1)[0] = myIjkVideoView;
@@ -182,7 +188,7 @@ public class ThreePull2Activity extends AppCompatActivity {
             @Override
             public void onDoubleClick() {
               //  Toast.makeText(ThreePull2Activity.this,"双击22",Toast.LENGTH_LONG).show();
-                MyIjkVideoView myIjkVideoView = new MyIjkVideoView(ThreePull2Activity.this);
+                MyIjkVideoView myIjkVideoView = new MyIjkVideoView(ThreePull21Activity.this);
                 myIjkVideoView = list.get(0)[0];
                 list.get(0)[0] =list.get(2)[0];
                 list.get(2)[0] = myIjkVideoView;
@@ -204,7 +210,7 @@ public class ThreePull2Activity extends AppCompatActivity {
         });
 
 
-
+        okhttpGet();
     }
 
 
@@ -251,16 +257,41 @@ public class ThreePull2Activity extends AppCompatActivity {
         niubiDialog.setOnclickListener(R.id.btn_common_1, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ThreePull2Activity.this,"button----1",Toast.LENGTH_LONG).show();
+                Toast.makeText(ThreePull21Activity.this,"button----1",Toast.LENGTH_LONG).show();
             }
         });
         niubiDialog.setOnclickListener(R.id.btn_common_2, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ThreePull2Activity.this,"button----2",Toast.LENGTH_LONG).show();
+                Toast.makeText(ThreePull21Activity.this,"button----2",Toast.LENGTH_LONG).show();
                 niubiDialog.dismiss();
             }
         });
+    }
+
+    /**
+     * 请求首页默认接口
+     */
+    private void okhttpGet() {
+        OkHttpClient okHttpClient = new OkHttpClient();
+        Request request = new Request.Builder().url("http://192.168.0.132:8090/latui/getAll").build();
+//        Request request = new Request.Builder().url("http://192.168.199.131:8090/latui/defaultApi").build();
+        Call call = okHttpClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+                Log.e("get",""+e);
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                Log.e("get",""+response.body().string());
+            }
+        });
+
+
+
     }
 
 
