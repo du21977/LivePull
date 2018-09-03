@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dibi.livepull.bean.DefaultApiBean;
+import com.dibi.livepull.dialog.LoadingDialog;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -189,24 +190,28 @@ public class Setup1Activity extends AppCompatActivity {
      * @param parames
      */
     private void okhttpPost(String parames) {
+        LoadingDialog.showDialogForLoading(Setup1Activity.this);
         Log.e("请求参数拼接--",parames);
         OkHttpClient okHttpClient = new OkHttpClient();
         //表单---此处没有添加什么头信息
         FormBody formBody = new FormBody.Builder()
                 .add("paramter",parames)
                 .build();
-        Request request = new Request.Builder().post(formBody).url("http://192.168.0.131:8090/latui/secondApi").build();
+
+//        Request request = new Request.Builder().post(formBody).url("http://192.168.0.131:8090/latui/secondApi").build();
+        Request request = new Request.Builder().post(formBody).url("http://gaolatui.kfcit.com/latui/secondApi").build();
         Call call = okHttpClient.newCall(request);
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 Log.e("POST----",""+e);
+                LoadingDialog.cancelDialogForLoading();
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 Log.e("POST---success-",""+response.body().string());
-
+                LoadingDialog.cancelDialogForLoading();
                 startActivity(new Intent(Setup1Activity.this,ThreePull0831Activity.class));
             }
         });
@@ -216,14 +221,18 @@ public class Setup1Activity extends AppCompatActivity {
      * 请求首页默认接口
      */
     private void okhttpGet() {
+        LoadingDialog.showDialogForLoading(Setup1Activity.this);
         OkHttpClient okHttpClient = new OkHttpClient();
-        Request request = new Request.Builder().url("http://192.168.0.131:8090/latui/defaultApi").build();
+
+        Request request = new Request.Builder().url("http://gaolatui.kfcit.com/latui/defaultApi").build();
+//        Request request = new Request.Builder().url("http://192.168.0.131:8090/latui/defaultApi").build();
 //        Request request = new Request.Builder().url("http://192.168.199.131:8090/latui/defaultApi").build();
         Call call = okHttpClient.newCall(request);
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 Log.e("get----",""+e);
+                LoadingDialog.cancelDialogForLoading();
             }
 
             @Override
@@ -233,6 +242,7 @@ public class Setup1Activity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        LoadingDialog.cancelDialogForLoading();
                         defaultApiBean = new Gson().fromJson(result,DefaultApiBean.class);
                         Log.e("get----",""+result);
                         Log.e("get----",""+ defaultApiBean.getData().size()+"");
