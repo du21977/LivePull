@@ -103,7 +103,7 @@ public class Setup1Activity extends AppCompatActivity {
                             parames = parames +"?"+defaultApiBean.getData().get(2).getId()+","+editText3.getText().toString().trim()+","+defaultApiBean.getData().get(2).getGid()+","+defaultApiBean.getData().get(2).getStyleType();
                         }
                         if(editText4!=null){
-                            parames = parames +"?"+defaultApiBean.getData().get(3).getId()+","+editText4.getText().toString().trim()+","+defaultApiBean.getData().get(3).getGid()+","+defaultApiBean.getData().get(3).getStyleType();
+                            parames = parames +"?"+100000+","+editText4.getText().toString().trim()+","+1+","+1;
                         }
 
                     }

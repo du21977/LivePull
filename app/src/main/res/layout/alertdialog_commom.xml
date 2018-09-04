@@ -11,7 +11,7 @@
     <EditText
         android:id="@+id/et_1"
         android:layout_width="400dp"
-        android:layout_height="43dp"
+        android:layout_height="33dp"
         android:hint="请输入拉流地址"
         android:textColor="#333333"
         android:textColorHint="#999999"
@@ -26,7 +26,7 @@
     <EditText
         android:id="@+id/et_2"
         android:layout_width="400dp"
-        android:layout_height="43dp"
+        android:layout_height="33dp"
         android:background="@drawable/app_background"
         android:hint="请输入拉流地址"
         android:textColor="#333333"
@@ -42,7 +42,23 @@
     <EditText
         android:id="@+id/et_3"
         android:layout_width="400dp"
-        android:layout_height="43dp"
+        android:layout_height="33dp"
+        android:background="@drawable/app_background"
+        android:hint="请输入拉流地址"
+        android:textColor="#333333"
+        android:paddingLeft="0dp"
+        android:layout_marginTop="10dp"
+        android:textColorHint="#999999"
+        android:textSize="13sp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_gravity="center_horizontal"
+        />
+
+    <EditText
+        android:id="@+id/et_4"
+        android:layout_width="400dp"
+        android:layout_height="33dp"
         android:background="@drawable/app_background"
         android:hint="请输入拉流地址"
         android:textColor="#333333"
