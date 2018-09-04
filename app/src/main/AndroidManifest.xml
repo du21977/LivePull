@@ -32,11 +32,15 @@
             android:name=".ThreePull21Activity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="landscape" />
-        <activity android:name=".ThreePull22Activity"
+        <activity
+            android:name=".ThreePull22Activity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="landscape"
-            ></activity>
-        <activity android:name=".ThreePull0831Activity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".ThreePull0831Activity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="landscape" />
+        <activity android:name=".ViewPagerActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="landscape"
             ></activity>

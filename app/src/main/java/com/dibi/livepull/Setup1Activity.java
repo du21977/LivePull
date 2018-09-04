@@ -212,7 +212,8 @@ public class Setup1Activity extends AppCompatActivity {
             public void onResponse(Call call, Response response) throws IOException {
                 Log.e("POST---success-",""+response.body().string());
                 LoadingDialog.cancelDialogForLoading();
-                startActivity(new Intent(Setup1Activity.this,ThreePull0831Activity.class));
+//                startActivity(new Intent(Setup1Activity.this,ThreePull0831Activity.class));
+                startActivity(new Intent(Setup1Activity.this,ViewPagerActivity.class));
             }
         });
     }
