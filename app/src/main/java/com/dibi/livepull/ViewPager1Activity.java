@@ -103,9 +103,15 @@ public class ViewPager1Activity extends AppCompatActivity {
         Call call = okHttpClient.newCall(request);
         call.enqueue(new Callback() {
             @Override
-            public void onFailure(Call call, IOException e) {
+            public void onFailure(Call call, final IOException e) {
                 Log.e("getAll--",""+e);
-                LoadingDialog.cancelDialogForLoading();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        LoadingDialog.cancelDialogForLoading();
+                        Toast.makeText(ViewPager1Activity.this,"错误"+e,Toast.LENGTH_LONG).show();
+                    }
+                });
             }
 
             @Override
@@ -212,18 +218,30 @@ public class ViewPager1Activity extends AppCompatActivity {
         Call call = okHttpClient.newCall(request);
         call.enqueue(new Callback() {
             @Override
-            public void onFailure(Call call, IOException e) {
+            public void onFailure(Call call, final IOException e) {
                 Log.e("ThreePull0831--POST----",""+e);
-                LoadingDialog.cancelDialogForLoading();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        LoadingDialog.cancelDialogForLoading();
+                        Toast.makeText(ViewPager1Activity.this,"错误"+e,Toast.LENGTH_LONG).show();
+                    }
+                });
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 Log.e("ThreePull0831-p-success",""+response.body().string());
-                LoadingDialog.cancelDialogForLoading();
-                niubiDialog.dismiss();
-                //请求成功后------
-                okhttpGetAll();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        LoadingDialog.cancelDialogForLoading();
+                        niubiDialog.dismiss();
+                        //请求成功后------
+                        okhttpGetAll();
+                    }
+                });
+
             }
         });
     }
@@ -241,9 +259,15 @@ public class ViewPager1Activity extends AppCompatActivity {
         Call call = okHttpClient.newCall(request);
         call.enqueue(new Callback() {
             @Override
-            public void onFailure(Call call, IOException e) {
+            public void onFailure(Call call, final IOException e) {
                 Log.e("getAll--",""+e);
-                LoadingDialog.cancelDialogForLoading();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        LoadingDialog.cancelDialogForLoading();
+                        Toast.makeText(ViewPager1Activity.this,"错误"+e,Toast.LENGTH_LONG).show();
+                    }
+                });
             }
 
             @Override

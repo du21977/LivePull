@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="30dp"
+    android:layout_marginRight="30dp"
+    android:background="#1E1E28"
+    >
+
+    <EditText
+        android:id="@+id/et_yuming"
+        android:layout_width="300dp"
+        android:layout_height="33dp"
+        android:hint="请输入域名"
+        android:textColor="#333333"
+        android:textColorHint="#999999"
+        android:background="@drawable/app_background"
+        android:textSize="13sp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal"
+        android:text="http://gaolatui.kfcit.com"
+        />
+
+
+
+    <TextView
+        android:id="@+id/tv_dialog_yuming"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/app_button_style_2"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:text="确定域名"
+        android:textSize="15sp"
+        android:textColor="#ffffff"
+        android:gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_gravity="center_horizontal"
+        />
+
+
+
+
+</LinearLayout>

@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.dibi.livepull.bean.DefaultApiBean;
 import com.dibi.livepull.dialog.LoadingDialog;
+import com.dibi.livepull.dialog.MyAlertDialog;
 import com.dibi.livepull.global.GlobalContants;
 import com.google.gson.Gson;
 
@@ -80,6 +81,10 @@ public class Setup1Activity extends AppCompatActivity {
         tv_add = (TextView) findViewById(R.id.tv_add);
         ll_sb = (LinearLayout) findViewById(R.id.ll_sb);
         edit_1 = (EditText) findViewById(R.id.edit_1);
+
+        ll_sb.setVisibility(View.INVISIBLE);
+        tv_add.setVisibility(View.INVISIBLE);
+        tv_play.setVisibility(View.INVISIBLE);
 
 
         final LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,dp2px(50));
@@ -181,7 +186,9 @@ public class Setup1Activity extends AppCompatActivity {
         });
 
 
-        okhttpGet();
+//        okhttpGet();
+        niubiAlertDialog();
+
         //okhttpPost();
     }
 
@@ -205,17 +212,29 @@ public class Setup1Activity extends AppCompatActivity {
         Call call = okHttpClient.newCall(request);
         call.enqueue(new Callback() {
             @Override
-            public void onFailure(Call call, IOException e) {
+            public void onFailure(Call call, final IOException e) {
                 Log.e("POST----",""+e);
-                LoadingDialog.cancelDialogForLoading();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        LoadingDialog.cancelDialogForLoading();
+                        Toast.makeText(Setup1Activity.this,"错误"+e,Toast.LENGTH_LONG).show();
+                    }
+                });
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 Log.e("POST---success-",""+response.body().string());
-                LoadingDialog.cancelDialogForLoading();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        LoadingDialog.cancelDialogForLoading();
 //                startActivity(new Intent(Setup1Activity.this,ThreePull0831Activity.class));
-                startActivity(new Intent(Setup1Activity.this,ViewPagerActivity.class));
+                        startActivity(new Intent(Setup1Activity.this,ViewPagerActivity.class));
+                    }
+                });
+
             }
         });
     }
@@ -234,9 +253,15 @@ public class Setup1Activity extends AppCompatActivity {
         Call call = okHttpClient.newCall(request);
         call.enqueue(new Callback() {
             @Override
-            public void onFailure(Call call, IOException e) {
+            public void onFailure(Call call, final IOException e) {
                 Log.e("get----",""+e);
-                LoadingDialog.cancelDialogForLoading();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        LoadingDialog.cancelDialogForLoading();
+                        Toast.makeText(Setup1Activity.this,"错误"+e,Toast.LENGTH_LONG).show();
+                    }
+                });
             }
 
             @Override
@@ -311,6 +336,7 @@ public class Setup1Activity extends AppCompatActivity {
         editText2.setLayoutParams(layoutParams111);
         editText2.setText(url);
 //        editText2.setTextSize(sp2px(7));
+        editText2.setTextSize(14);  //系统已经自动转换成sp了，不需要我们来sp2px
         editText2.setBackground(null);
         //删除的布局参数
         RelativeLayout.LayoutParams layoutParams222 = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -347,7 +373,7 @@ public class Setup1Activity extends AppCompatActivity {
         layoutParams111.setMargins(0,0,dp2px(30),0);
         editText3.setLayoutParams(layoutParams111);
         editText3.setText(url);
-        editText3.setTextSize(sp2px(7));
+        editText3.setTextSize(14);
         editText3.setBackground(null);
         //删除的布局参数
         RelativeLayout.LayoutParams layoutParams222 = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -383,7 +409,7 @@ public class Setup1Activity extends AppCompatActivity {
         layoutParams111.setMargins(0,0,dp2px(30),0);
         editText4.setLayoutParams(layoutParams111);
         editText4.setText(url);
-        editText4.setTextSize(sp2px(7));
+        editText4.setTextSize(14);
         editText4.setBackground(null);
         //删除的布局参数
         RelativeLayout.LayoutParams layoutParams222 = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -404,6 +430,44 @@ public class Setup1Activity extends AppCompatActivity {
                 ll_sb.removeView(relativeLayout);
             }
         });
+    }
+
+
+
+
+    /**
+     * 万能的Dialog
+     */
+    MyAlertDialog niubiDialog;
+    private void niubiAlertDialog() {
+        niubiDialog = new MyAlertDialog.Builder(this)
+                .setContentView(R.layout.alertdialog_yuming)
+                .setCancelable(false)
+                .show();
+        //.formBottom(true).fullWidth().show();
+//        Button button1 = niubiDialog.getView(R.id.btn_common_1);
+//        Button button2 = niubiDialog.getView(R.id.btn_common_2);
+
+        final EditText et_yuming = niubiDialog.getView(R.id.et_yuming);
+
+
+
+        niubiDialog.setOnclickListener(R.id.tv_dialog_yuming, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(et_yuming.getText().toString().trim().equals("")){
+                    Toast.makeText(Setup1Activity.this,"域名不能为空哦",Toast.LENGTH_LONG).show();
+                }else {
+                    niubiDialog.dismiss();
+                    ll_sb.setVisibility(View.VISIBLE);
+                    tv_add.setVisibility(View.VISIBLE);
+                    tv_play.setVisibility(View.VISIBLE);
+                    GlobalContants.SERVER_URL = et_yuming.getText().toString().trim();
+                    okhttpGet();
+                }
+            }
+        });
+
     }
 
 }
