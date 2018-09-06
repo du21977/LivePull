@@ -1,5 +1,6 @@
 package com.dibi.livepull;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -202,8 +203,8 @@ public class ViewPagerActivity extends AppCompatActivity {
                 .add("paramter",parames)
                 .build();
 
-//        Request request = new Request.Builder().post(formBody).url("http://192.168.0.131:8090/latui/secondApi").build();
-        Request request = new Request.Builder().post(formBody).url("http://gaolatui.kfcit.com/latui/secondApi").build();
+//        Request request = new Request.Builder().post(formBody).url("http://192.168.0.131:8090/latui/addPage").build();
+        Request request = new Request.Builder().post(formBody).url("http://gaolatui.kfcit.com/latui/addPage").build();
         Call call = okHttpClient.newCall(request);
         call.enqueue(new Callback() {
             @Override
@@ -253,12 +254,16 @@ public class ViewPagerActivity extends AppCompatActivity {
                         if (allUrlBean !=null&& allUrlBean.getData().size()>0){
 //                            ThreePull0831Activity.MyAdapter myAdapter = new ThreePull0831Activity.MyAdapter();
 //                            mRecyclerView.setAdapter(myAdapter);
-                            fragmentList = new ArrayList<TestFm>();
-                            for(int i=0;i<allUrlBean.getData().size();i++){
-                                TestFm testFm = new TestFm().newInstance(result, i);
-                                fragmentList.add(testFm);
-                            }
-                            vp.setAdapter(new FragmentVPAdapter(getSupportFragmentManager(), (ArrayList<TestFm>) fragmentList));
+//                            fragmentList = new ArrayList<TestFm>();
+//                            for(int i=0;i<allUrlBean.getData().size();i++){
+//                                TestFm testFm = new TestFm().newInstance(result, i);
+//                                fragmentList.add(testFm);
+//                            }
+//                            vp.setAdapter(new FragmentVPAdapter(getSupportFragmentManager(), (ArrayList<TestFm>) fragmentList));
+//                            vp.setCurrentItem(0);
+
+                            startActivity(new Intent(ViewPagerActivity.this,ViewPager1Activity.class));
+                            finish();
                         }
                     }
                 });

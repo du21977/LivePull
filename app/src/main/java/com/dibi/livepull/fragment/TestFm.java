@@ -70,9 +70,9 @@ public class TestFm extends Fragment{
 	
 	public void initView(View view){
 		tv = (TextView)view.findViewById(R.id.tv);
-		tv.setText("我擦");
+//		tv.setText("我擦");
 //		tv.setText(list.get(flag));
-		tv.setText(allUrlBean.getData().get(flag).get(0).getPath());
+//		tv.setText(allUrlBean.getData().get(flag).get(0).getPath());
 
 		rl_item_total = view.findViewById(R.id.rl_item_total);
 		if(allUrlBean.getData().get(flag).size()==3){
@@ -190,7 +190,7 @@ public class TestFm extends Fragment{
 			}));
 
 ///////////////////////////////////////////////////下面是4个/////////////////////////////////////////////////////////////////////////////////////
-		}else if(allUrlBean.getData().get(flag).size()==4){
+		}else if(allUrlBean.getData().get(flag).size()>3){
 			final List<MyIjkVideoView[]> list = new ArrayList<MyIjkVideoView[]>() ;
 			//在这里搞事情
 			// 1.添加左边的播放器

@@ -709,8 +709,8 @@ public class ThreePull0831Activity extends AppCompatActivity {
                 .add("paramter",parames)
                 .build();
 
-//        Request request = new Request.Builder().post(formBody).url("http://192.168.0.131:8090/latui/secondApi").build();
-        Request request = new Request.Builder().post(formBody).url("http://gaolatui.kfcit.com/latui/secondApi").build();
+        Request request = new Request.Builder().post(formBody).url("http://192.168.0.131:8090/latui/addPage").build();
+//        Request request = new Request.Builder().post(formBody).url("http://gaolatui.kfcit.com/latui/addPage").build();
         Call call = okHttpClient.newCall(request);
         call.enqueue(new Callback() {
             @Override
@@ -737,8 +737,8 @@ public class ThreePull0831Activity extends AppCompatActivity {
         LoadingDialog.showDialogForLoading(ThreePull0831Activity.this);
         OkHttpClient okHttpClient = new OkHttpClient();
 
-//        Request request = new Request.Builder().url("http://192.168.0.131:8090/latui/getAll").build();
-        Request request = new Request.Builder().url(" http://gaolatui.kfcit.com/latui/getAll").build();
+        Request request = new Request.Builder().url("http://192.168.0.131:8090/latui/getAll").build();
+//        Request request = new Request.Builder().url(" http://gaolatui.kfcit.com/latui/getAll").build();
 //        Request request = new Request.Builder().url("http://192.168.199.131:8090/latui/defaultApi").build();
         Call call = okHttpClient.newCall(request);
         call.enqueue(new Callback() {

@@ -94,7 +94,7 @@ public class Setup1Activity extends AppCompatActivity {
                 Log.e("孩子总数",ll_sb.getChildCount()+"");
 
                 if(defaultApiBean!=null){
-                    if(defaultApiBean.getData().size()==3){
+//                    if(defaultApiBean.getData().size()==3||defaultApiBean.getData().size()==4){
                         parames = defaultApiBean.getData().get(0).getId()+","+edit_1.getText().toString().trim()+","+defaultApiBean.getData().get(0).getGid()+","+defaultApiBean.getData().get(0).getStyleType();
                         if(editText2!=null){
                             parames = parames +"?"+defaultApiBean.getData().get(1).getId()+","+editText2.getText().toString().trim()+","+defaultApiBean.getData().get(1).getGid()+","+defaultApiBean.getData().get(1).getStyleType();
@@ -103,10 +103,10 @@ public class Setup1Activity extends AppCompatActivity {
                             parames = parames +"?"+defaultApiBean.getData().get(2).getId()+","+editText3.getText().toString().trim()+","+defaultApiBean.getData().get(2).getGid()+","+defaultApiBean.getData().get(2).getStyleType();
                         }
                         if(editText4!=null){
-                            parames = parames +"?"+100000+","+editText4.getText().toString().trim()+","+1+","+1;
+                            parames = parames +"?"+0+","+editText4.getText().toString().trim()+","+1+","+1;
                         }
 
-                    }
+//                    }
                     okhttpPost(parames);
                 }
 
@@ -265,7 +265,7 @@ public class Setup1Activity extends AppCompatActivity {
                             addThirdEdit(defaultApiBean.getData().get(2).getPath());
 
 
-                        }else if(defaultApiBean.getData().size()==4){
+                        }else if(defaultApiBean.getData().size()>3){
                             edit_1.setText(defaultApiBean.getData().get(0).getPath());
                             addsecondEdit(defaultApiBean.getData().get(1).getPath());
                             addThirdEdit(defaultApiBean.getData().get(2).getPath());
@@ -307,7 +307,7 @@ public class Setup1Activity extends AppCompatActivity {
         layoutParams111.setMargins(0,0,dp2px(30),0);
         editText2.setLayoutParams(layoutParams111);
         editText2.setText(url);
-        editText2.setTextSize(sp2px(7));
+//        editText2.setTextSize(sp2px(7));
         editText2.setBackground(null);
         //删除的布局参数
         RelativeLayout.LayoutParams layoutParams222 = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
