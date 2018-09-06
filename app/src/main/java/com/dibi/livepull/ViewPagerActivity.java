@@ -14,6 +14,7 @@ import com.dibi.livepull.dialog.LoadingDialog;
 import com.dibi.livepull.dialog.MyAlertDialog;
 import com.dibi.livepull.fragment.FragmentVPAdapter;
 import com.dibi.livepull.fragment.TestFm;
+import com.dibi.livepull.global.GlobalContants;
 import com.dibi.livepull.view.NoPreloadViewPager;
 import com.google.gson.Gson;
 
@@ -95,8 +96,9 @@ public class ViewPagerActivity extends AppCompatActivity {
         OkHttpClient okHttpClient = new OkHttpClient();
 
 //        Request request = new Request.Builder().url("http://192.168.0.131:8090/latui/getAll").build();
-        Request request = new Request.Builder().url("http://gaolatui.kfcit.com/latui/getAll?i=1").build();
+//        Request request = new Request.Builder().url("http://gaolatui.kfcit.com/latui/getAll?i=1").build();
 //        Request request = new Request.Builder().url("http://192.168.199.131:8090/latui/defaultApi").build();
+        Request request = new Request.Builder().url(GlobalContants.GetAll_1).build();
         Call call = okHttpClient.newCall(request);
         call.enqueue(new Callback() {
             @Override
@@ -204,7 +206,8 @@ public class ViewPagerActivity extends AppCompatActivity {
                 .build();
 
 //        Request request = new Request.Builder().post(formBody).url("http://192.168.0.131:8090/latui/addPage").build();
-        Request request = new Request.Builder().post(formBody).url("http://gaolatui.kfcit.com/latui/addPage").build();
+//        Request request = new Request.Builder().post(formBody).url("http://gaolatui.kfcit.com/latui/addPage").build();
+        Request request = new Request.Builder().post(formBody).url(GlobalContants.AddPage).build();
         Call call = okHttpClient.newCall(request);
         call.enqueue(new Callback() {
             @Override

@@ -12,9 +12,17 @@ public class GlobalContants {
 //    public static final String SERVER_URL ="http://192.168.0.131:8090";
 
     // 登录
-    public static final String Login_URL = SERVER_URL + "/app/user/register/step2";
+    public static final String Default_Api = SERVER_URL + "/latui/defaultApi";
     // 退出登录
-    public static final String Login_OUT_URL = SERVER_URL + "/user/setup/loginOut";
+    public static final String Second_Api = SERVER_URL + "/latui/secondApi";
+
+    public static final String GetAll_1 = SERVER_URL + "/latui/getAll?i=1";
+
+    public static final String AddPage = SERVER_URL + "/latui/addPage";
+
+    public static final String GetAll = SERVER_URL + "/latui/getAll";
+
+
 
 
 

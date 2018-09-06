@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.dibi.livepull.bean.DefaultApiBean;
 import com.dibi.livepull.dialog.LoadingDialog;
+import com.dibi.livepull.global.GlobalContants;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -199,7 +200,8 @@ public class Setup1Activity extends AppCompatActivity {
                 .build();
 
 //        Request request = new Request.Builder().post(formBody).url("http://192.168.0.131:8090/latui/secondApi").build();
-        Request request = new Request.Builder().post(formBody).url("http://gaolatui.kfcit.com/latui/secondApi").build();
+//        Request request = new Request.Builder().post(formBody).url("http://gaolatui.kfcit.com/latui/secondApi").build();
+        Request request = new Request.Builder().post(formBody).url(GlobalContants.Second_Api).build();
         Call call = okHttpClient.newCall(request);
         call.enqueue(new Callback() {
             @Override
@@ -225,9 +227,10 @@ public class Setup1Activity extends AppCompatActivity {
         LoadingDialog.showDialogForLoading(Setup1Activity.this);
         OkHttpClient okHttpClient = new OkHttpClient();
 
-        Request request = new Request.Builder().url("http://gaolatui.kfcit.com/latui/defaultApi").build();
+//        Request request = new Request.Builder().url("http://gaolatui.kfcit.com/latui/defaultApi").build();
 //        Request request = new Request.Builder().url("http://192.168.0.131:8090/latui/defaultApi").build();
 //        Request request = new Request.Builder().url("http://192.168.199.131:8090/latui/defaultApi").build();
+        Request request = new Request.Builder().url(GlobalContants.Default_Api).build();
         Call call = okHttpClient.newCall(request);
         call.enqueue(new Callback() {
             @Override
