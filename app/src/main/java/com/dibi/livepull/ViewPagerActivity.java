@@ -1,6 +1,7 @@
 package com.dibi.livepull;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -38,20 +39,60 @@ public class ViewPagerActivity extends AppCompatActivity {
     TextView tv_add_video_url ;
     private List<String> contentList = new ArrayList<String>(); //内容链表
     private List<TestFm> fragmentList = new ArrayList<TestFm>(); //碎片链表
+
+    private int currentPosition;
+
+    TextView tv_num;
+    TextView tv_num1;
+    TextView tv_num2;
+    TextView tv_num3;
+    TextView tv_num4;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_pager);
         vp = (NoPreloadViewPager) findViewById(R.id.viewPager);
+        tv_num = (TextView) findViewById(R.id.tv_num);
+        tv_num1 = (TextView) findViewById(R.id.tv_num1);
+        tv_num2 = (TextView) findViewById(R.id.tv_num2);
+        tv_num3 = (TextView) findViewById(R.id.tv_num3);
+        tv_num4 = (TextView) findViewById(R.id.tv_num4);
         vp.setOnPageChangeListener(new NoPreloadViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
+                //tv_num.setText(((position+1)/allUrlBean.getData().size())+"");
+                Log.e("-------",position+"");
+                Log.e("-------",positionOffsetPixels+"");
             }
 
             @Override
             public void onPageSelected(int position) {
+                currentPosition = position;
+                tv_num.setText(((position+1)+"/"+allUrlBean.getData().size())+"");
                 vp.setCurrentItem(position);
+                if(position==0){
+                    tv_num1.setTextColor(Color.parseColor("#ff0000"));
+                    tv_num2.setTextColor(Color.parseColor("#ffffff"));
+                    tv_num3.setTextColor(Color.parseColor("#ffffff"));
+                    tv_num4.setTextColor(Color.parseColor("#ffffff"));
+                }else if(position==1){
+                    tv_num1.setTextColor(Color.parseColor("#ffffff"));
+                    tv_num2.setTextColor(Color.parseColor("#ff0000"));
+                    tv_num3.setTextColor(Color.parseColor("#ffffff"));
+                    tv_num4.setTextColor(Color.parseColor("#ffffff"));
+                }else if(position==2){
+                    tv_num1.setTextColor(Color.parseColor("#ffffff"));
+                    tv_num2.setTextColor(Color.parseColor("#ffffff"));
+                    tv_num3.setTextColor(Color.parseColor("#ff0000"));
+                    tv_num4.setTextColor(Color.parseColor("#ffffff"));
+                }else if(position==3){
+                    tv_num1.setTextColor(Color.parseColor("#ffffff"));
+                    tv_num2.setTextColor(Color.parseColor("#ffffff"));
+                    tv_num3.setTextColor(Color.parseColor("#ffffff"));
+                    tv_num4.setTextColor(Color.parseColor("#ff0000"));
+                }
             }
 
             @Override
@@ -61,14 +102,44 @@ public class ViewPagerActivity extends AppCompatActivity {
         });
         tv_add_video_url = (TextView) findViewById(R.id.tv_add_video_url);
 
+
         tv_add_video_url.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //niubiAlertDialog();
+                //Toast.makeText(ViewPagerActivity.this,currentPosition+"",Toast.LENGTH_LONG).show();
                 niubiAlertDialog();
             }
         });
 
-        okhttpGetAllId1();
+
+        //弹出对话框配置服务器地址
+        niubiAlertDialog11();
+
+        tv_num1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                vp.setCurrentItem(0,false);
+            }
+        });
+        tv_num2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                vp.setCurrentItem(1,false);
+            }
+        });
+        tv_num3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                vp.setCurrentItem(2,false);
+            }
+        });
+        tv_num4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                vp.setCurrentItem(3,false);
+            }
+        });
 
 //        //添加内容
 //        contentList.add("页面一");
@@ -120,7 +191,7 @@ public class ViewPagerActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         LoadingDialog.cancelDialogForLoading();
-                        Log.e("ThreePull0831--getAll",result);
+                        Log.e(TAG,result);
                         allUrlBean = new Gson().fromJson(result,AllUrlBean.class);
                         if (allUrlBean !=null&& allUrlBean.getData().size()>0){
 //                            ThreePull0831Activity.MyAdapter myAdapter = new ThreePull0831Activity.MyAdapter();
@@ -131,6 +202,28 @@ public class ViewPagerActivity extends AppCompatActivity {
                                 fragmentList.add(testFm);
                             }
                             vp.setAdapter(new FragmentVPAdapter(getSupportFragmentManager(), (ArrayList<TestFm>) fragmentList));
+
+                            if(allUrlBean.getData().size()==1){
+                                tv_num1.setVisibility(View.VISIBLE);
+                                tv_num2.setVisibility(View.GONE);
+                                tv_num3.setVisibility(View.GONE);
+                                tv_num4.setVisibility(View.GONE);
+                            }else if(allUrlBean.getData().size()==2){
+                                tv_num1.setVisibility(View.VISIBLE);
+                                tv_num2.setVisibility(View.VISIBLE);
+                                tv_num3.setVisibility(View.GONE);
+                                tv_num4.setVisibility(View.GONE);
+                            }else if(allUrlBean.getData().size()==3){
+                                tv_num1.setVisibility(View.VISIBLE);
+                                tv_num2.setVisibility(View.VISIBLE);
+                                tv_num3.setVisibility(View.VISIBLE);
+                                tv_num4.setVisibility(View.GONE);
+                            }else if(allUrlBean.getData().size()==4){
+                                tv_num1.setVisibility(View.VISIBLE);
+                                tv_num2.setVisibility(View.VISIBLE);
+                                tv_num3.setVisibility(View.VISIBLE);
+                                tv_num4.setVisibility(View.VISIBLE);
+                            }
                         }
                     }
                 });
@@ -139,9 +232,46 @@ public class ViewPagerActivity extends AppCompatActivity {
 
     }
 
+    MyAlertDialog niubiDialog;
+    private void niubiAlertDialog() {
+        niubiDialog = new MyAlertDialog.Builder(this)
+                .setContentView(R.layout.alertdialog_commom)
+                .show();
+        //.formBottom(true).fullWidth().show();
+//        Button button1 = niubiDialog.getView(R.id.btn_common_1);
+//        Button button2 = niubiDialog.getView(R.id.btn_common_2);
+
+        final EditText et_1 = niubiDialog.getView(R.id.et_1);
+        final EditText et_2 = niubiDialog.getView(R.id.et_2);
+        final EditText et_3 = niubiDialog.getView(R.id.et_3);
+        final EditText et_4 = niubiDialog.getView(R.id.et_4);
+
+        niubiDialog.setText(R.id.btn_common_1,"哈哈");
+
+        if (allUrlBean !=null&& allUrlBean.getData().size()>0){
+            Log.e(TAG,allUrlBean.getData().get(currentPosition).size()+"");
+            if(allUrlBean.getData().get(currentPosition).size()==3){
+                et_1.setText(allUrlBean.getData().get(currentPosition).get(0).getPath());
+                et_2.setText(allUrlBean.getData().get(currentPosition).get(1).getPath());
+                et_3.setText(allUrlBean.getData().get(currentPosition).get(2).getPath());
+                et_4.setVisibility(View.GONE);
+            }else if(allUrlBean.getData().get(currentPosition).size()>=4){
+                et_1.setText(allUrlBean.getData().get(currentPosition).get(0).getPath());
+                et_2.setText(allUrlBean.getData().get(currentPosition).get(1).getPath());
+                et_3.setText(allUrlBean.getData().get(currentPosition).get(2).getPath());
+                et_4.setVisibility(View.VISIBLE);
+                et_4.setText(allUrlBean.getData().get(currentPosition).get(3).getPath());
+            }
+        }
+
+    }
+
+
     /**
-     * 万能的Dialog
+     * 万能的Dialog----弹出输入地址上传服务器
      */
+
+    /*
     MyAlertDialog niubiDialog;
     private void niubiAlertDialog() {
         niubiDialog = new MyAlertDialog.Builder(this)
@@ -194,7 +324,7 @@ public class ViewPagerActivity extends AppCompatActivity {
                 niubiDialog.dismiss();
             }
         });
-    }
+    }*/
 
 
     /**
@@ -296,6 +426,44 @@ public class ViewPagerActivity extends AppCompatActivity {
                         }
                     }
                 });
+            }
+        });
+
+    }
+
+    /**
+     * 万能的Dialog-----配置域名
+     */
+    MyAlertDialog niubiDialog1;
+    private void niubiAlertDialog11() {
+        niubiDialog1 = new MyAlertDialog.Builder(this)
+                .setContentView(R.layout.alertdialog_yuming)
+                .setCancelable(false)
+                .show();
+        //.formBottom(true).fullWidth().show();
+//        Button button1 = niubiDialog.getView(R.id.btn_common_1);
+//        Button button2 = niubiDialog.getView(R.id.btn_common_2);
+
+        final EditText et_yuming = niubiDialog1.getView(R.id.et_yuming);
+
+
+
+        niubiDialog1.setOnclickListener(R.id.tv_dialog_yuming, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(et_yuming.getText().toString().trim().equals("")){
+                    Toast.makeText(ViewPagerActivity.this,"域名不能为空哦",Toast.LENGTH_LONG).show();
+                }else {
+                    niubiDialog1.dismiss();
+                    tv_add_video_url.setVisibility(View.VISIBLE);
+                    tv_num1.setVisibility(View.VISIBLE);
+                    tv_num2.setVisibility(View.VISIBLE);
+                    tv_num3.setVisibility(View.VISIBLE);
+                    tv_num4.setVisibility(View.VISIBLE);
+                    GlobalContants.SERVER_URL = et_yuming.getText().toString().trim();
+                    okhttpGetAllId1();
+
+                }
             }
         });
 

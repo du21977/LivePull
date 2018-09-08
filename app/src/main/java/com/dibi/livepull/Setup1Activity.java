@@ -98,23 +98,23 @@ public class Setup1Activity extends AppCompatActivity {
 //                startActivity(new Intent(Setup1Activity.this,ThreePull2Activity.class));
                 ll_sb.getChildCount();
                 Log.e("孩子总数",ll_sb.getChildCount()+"");
-
-                if(defaultApiBean!=null){
-//                    if(defaultApiBean.getData().size()==3||defaultApiBean.getData().size()==4){
-                        parames = defaultApiBean.getData().get(0).getId()+","+edit_1.getText().toString().trim()+","+defaultApiBean.getData().get(0).getGid()+","+defaultApiBean.getData().get(0).getStyleType();
-                        if(editText2!=null){
-                            parames = parames +"?"+defaultApiBean.getData().get(1).getId()+","+editText2.getText().toString().trim()+","+defaultApiBean.getData().get(1).getGid()+","+defaultApiBean.getData().get(1).getStyleType();
-                        }
-                        if(editText3!=null){
-                            parames = parames +"?"+defaultApiBean.getData().get(2).getId()+","+editText3.getText().toString().trim()+","+defaultApiBean.getData().get(2).getGid()+","+defaultApiBean.getData().get(2).getStyleType();
-                        }
-                        if(editText4!=null){
-                            parames = parames +"?"+0+","+editText4.getText().toString().trim()+","+1+","+1;
-                        }
-
-//                    }
-                    okhttpPost(parames);
-                }
+                startActivity(new Intent(Setup1Activity.this,ViewPagerActivity.class));
+//                if(defaultApiBean!=null){
+////                    if(defaultApiBean.getData().size()==3||defaultApiBean.getData().size()==4){
+//                        parames = defaultApiBean.getData().get(0).getId()+","+edit_1.getText().toString().trim()+","+defaultApiBean.getData().get(0).getGid()+","+defaultApiBean.getData().get(0).getStyleType();
+//                        if(editText2!=null){
+//                            parames = parames +"?"+defaultApiBean.getData().get(1).getId()+","+editText2.getText().toString().trim()+","+defaultApiBean.getData().get(1).getGid()+","+defaultApiBean.getData().get(1).getStyleType();
+//                        }
+//                        if(editText3!=null){
+//                            parames = parames +"?"+defaultApiBean.getData().get(2).getId()+","+editText3.getText().toString().trim()+","+defaultApiBean.getData().get(2).getGid()+","+defaultApiBean.getData().get(2).getStyleType();
+//                        }
+//                        if(editText4!=null){
+//                            parames = parames +"?"+0+","+editText4.getText().toString().trim()+","+1+","+1;
+//                        }
+//
+////                    }
+//                    okhttpPost(parames);
+//                }
 
 
 
@@ -332,7 +332,7 @@ public class Setup1Activity extends AppCompatActivity {
         //EditText视频地址的url参数
         RelativeLayout.LayoutParams layoutParams111 = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,dp2px(50));
         layoutParams111.addRule(RelativeLayout.CENTER_VERTICAL);
-        layoutParams111.setMargins(0,0,dp2px(30),0);
+        layoutParams111.setMargins(0,0,dp2px(0),0);
         editText2.setLayoutParams(layoutParams111);
         editText2.setText(url);
 //        editText2.setTextSize(sp2px(7));
@@ -345,7 +345,7 @@ public class Setup1Activity extends AppCompatActivity {
         textView2.setLayoutParams(layoutParams222);
         textView2.setText("删除");
         relativeLayout.addView(editText2);
-        relativeLayout.addView(textView2);
+        //relativeLayout.addView(textView2);
         relativeLayout.setLayoutParams(layoutParams_1);
         ll_sb.addView(relativeLayout);
         textView2.setOnClickListener(new View.OnClickListener() {
@@ -370,7 +370,7 @@ public class Setup1Activity extends AppCompatActivity {
         //EditText视频地址的url参数
         RelativeLayout.LayoutParams layoutParams111 = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,dp2px(50));
         layoutParams111.addRule(RelativeLayout.CENTER_VERTICAL);
-        layoutParams111.setMargins(0,0,dp2px(30),0);
+        layoutParams111.setMargins(0,0,dp2px(0),0);
         editText3.setLayoutParams(layoutParams111);
         editText3.setText(url);
         editText3.setTextSize(14);
@@ -382,7 +382,7 @@ public class Setup1Activity extends AppCompatActivity {
         textView3.setLayoutParams(layoutParams222);
         textView3.setText("删除");
         relativeLayout.addView(editText3);
-        relativeLayout.addView(textView3);
+        //relativeLayout.addView(textView3);
         relativeLayout.setLayoutParams(layoutParams_1);
         ll_sb.addView(relativeLayout);
         textView3.setOnClickListener(new View.OnClickListener() {
@@ -406,7 +406,7 @@ public class Setup1Activity extends AppCompatActivity {
         //EditText视频地址的url参数
         RelativeLayout.LayoutParams layoutParams111 = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,dp2px(50));
         layoutParams111.addRule(RelativeLayout.CENTER_VERTICAL);
-        layoutParams111.setMargins(0,0,dp2px(30),0);
+        layoutParams111.setMargins(0,0,dp2px(0),0);
         editText4.setLayoutParams(layoutParams111);
         editText4.setText(url);
         editText4.setTextSize(14);
@@ -419,7 +419,7 @@ public class Setup1Activity extends AppCompatActivity {
         textView4.setText("删除");
 
         relativeLayout.addView(editText4);
-        relativeLayout.addView(textView4);
+        //relativeLayout.addView(textView4);
 
         relativeLayout.setLayoutParams(layoutParams_1);
         ll_sb.addView(relativeLayout);

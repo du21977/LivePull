@@ -51,7 +51,7 @@
                 android:textColorHint="#999999"
                 android:textSize="14sp"
                 android:text="rtmp://live.hkstv.hk.lxdns.com/live/hks"
-                android:layout_marginRight="30dp"
+                android:layout_marginRight="0dp"
                 android:background="@null"
                 />
 

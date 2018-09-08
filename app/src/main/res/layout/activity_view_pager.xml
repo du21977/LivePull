@@ -29,13 +29,90 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#ff0000"
-        android:text="添加"
+        android:text="查看地址"
         android:layout_alignParentBottom="true"
         android:paddingLeft="15dp"
         android:paddingBottom="15dp"
         android:textSize="15sp"
-
+        android:visibility="invisible"
         />
+
+    <TextView
+        android:id="@+id/tv_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/tv_add_video_url"
+        android:layout_marginLeft="10dp"
+        android:layout_alignParentBottom="true"
+        android:paddingLeft="15dp"
+        android:paddingBottom="15dp"
+        android:textSize="15sp"
+        android:text="1/6"
+        android:textColor="#ff0000"
+        android:visibility="gone"
+        />
+
+    <TextView
+        android:id="@+id/tv_num1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/tv_add_video_url"
+        android:layout_marginLeft="10dp"
+        android:layout_alignParentBottom="true"
+        android:paddingLeft="20dp"
+        android:paddingBottom="15dp"
+        android:textSize="15sp"
+        android:text="源1"
+        android:textColor="#ff0000"
+        android:gravity="center"
+        android:visibility="invisible"
+        />
+
+    <TextView
+        android:id="@+id/tv_num2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/tv_num1"
+        android:layout_marginLeft="10dp"
+        android:layout_alignParentBottom="true"
+        android:paddingLeft="20dp"
+        android:paddingBottom="15dp"
+        android:textSize="15sp"
+        android:text="源2"
+        android:textColor="#ffffff"
+        android:visibility="invisible"
+        />
+
+    <TextView
+        android:id="@+id/tv_num3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/tv_num2"
+        android:layout_marginLeft="10dp"
+        android:layout_alignParentBottom="true"
+        android:paddingLeft="30dp"
+        android:paddingBottom="15dp"
+        android:textSize="15sp"
+        android:text="源3"
+        android:textColor="#ffffff"
+        android:visibility="invisible"
+        />
+
+    <TextView
+        android:id="@+id/tv_num4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/tv_num3"
+        android:layout_marginLeft="10dp"
+        android:layout_alignParentBottom="true"
+        android:paddingLeft="30dp"
+        android:paddingBottom="15dp"
+        android:textSize="15sp"
+        android:text="源4"
+        android:textColor="#ffffff"
+        android:visibility="invisible"
+        />
+
 
 
 </RelativeLayout>

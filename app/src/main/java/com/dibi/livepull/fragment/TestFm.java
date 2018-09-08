@@ -52,7 +52,7 @@ public class TestFm extends Fragment{
 			allUrlBean = new Gson().fromJson(result,AllUrlBean.class);
 //			Log.e("vvvv---",result+"res");
 			if (allUrlBean !=null&& allUrlBean.getData().size()>0){
-				Log.e("vvvv---",allUrlBean.getData().get(flag).get(0).getPath());
+//				Log.e("vvvv---",allUrlBean.getData().get(flag).get(0).getPath());
 			}
 		}
 	}
@@ -89,7 +89,7 @@ public class TestFm extends Fragment{
 			layoutParams_right_top.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
 			layoutParams_right_top.addRule(RelativeLayout.ALIGN_PARENT_TOP);
 			myIjkVideoView_2 = new MyIjkVideoView[]{new MyIjkVideoView(getActivity())};
-			myIjkVideoView_2[0].setBackgroundColor(Color.WHITE);
+			myIjkVideoView_2[0].setBackgroundColor(Color.BLACK);
 			myIjkVideoView_2[0].setLayoutParams(layoutParams_right_top);
 
 
@@ -189,6 +189,8 @@ public class TestFm extends Fragment{
 				}
 			}));
 
+			//添加查看地址
+
 ///////////////////////////////////////////////////下面是4个/////////////////////////////////////////////////////////////////////////////////////
 		}else if(allUrlBean.getData().get(flag).size()>3){
 			final List<MyIjkVideoView[]> list = new ArrayList<MyIjkVideoView[]>() ;
@@ -204,7 +206,7 @@ public class TestFm extends Fragment{
 			layoutParams_right_top.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
 			layoutParams_right_top.addRule(RelativeLayout.ALIGN_PARENT_TOP);
 			myIjkVideoView_42 = new MyIjkVideoView[]{new MyIjkVideoView(getActivity())};
-			myIjkVideoView_42[0].setBackgroundColor(Color.WHITE);
+			myIjkVideoView_42[0].setBackgroundColor(Color.BLACK);
 			myIjkVideoView_42[0].setLayoutParams(layoutParams_right_top);
 
 			//3.添加右下角的播放器
@@ -253,10 +255,10 @@ public class TestFm extends Fragment{
 			String PULL_1 = allUrlBean.getData().get(flag).get(1).getPath();
 			String PULL_2 = allUrlBean.getData().get(flag).get(2).getPath();
 			String PULL_3 = allUrlBean.getData().get(flag).get(3).getPath();
-			myIjkVideoView_41[0].setVideoPath(PULL_1);
-			myIjkVideoView_42[0].setVideoPath(PULL_0);
-			myIjkVideoView_43[0].setVideoPath(PULL_2);
-			myIjkVideoView_4middle[0].setVideoPath(PULL_3);
+			myIjkVideoView_41[0].setVideoPath(PULL_0);
+			myIjkVideoView_42[0].setVideoPath(PULL_1);
+			myIjkVideoView_43[0].setVideoPath(PULL_3);
+			myIjkVideoView_4middle[0].setVideoPath(PULL_2);
 
 			myIjkVideoView_41[0].start();
 			myIjkVideoView_42[0].start();

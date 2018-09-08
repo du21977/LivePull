@@ -51,7 +51,7 @@ public class ViewPager1Activity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
-                vp.setCurrentItem(position);
+                vp.setCurrentItem(position,false);
             }
 
             @Override
