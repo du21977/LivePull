@@ -62,7 +62,7 @@
         android:paddingLeft="20dp"
         android:paddingBottom="15dp"
         android:textSize="15sp"
-        android:text="源1"
+        android:text=""
         android:textColor="#ff0000"
         android:gravity="center"
         android:visibility="invisible"
@@ -78,7 +78,7 @@
         android:paddingLeft="20dp"
         android:paddingBottom="15dp"
         android:textSize="15sp"
-        android:text="源2"
+        android:text=""
         android:textColor="#ffffff"
         android:visibility="invisible"
         />
@@ -93,7 +93,7 @@
         android:paddingLeft="30dp"
         android:paddingBottom="15dp"
         android:textSize="15sp"
-        android:text="源3"
+        android:text=""
         android:textColor="#ffffff"
         android:visibility="invisible"
         />
@@ -108,7 +108,7 @@
         android:paddingLeft="30dp"
         android:paddingBottom="15dp"
         android:textSize="15sp"
-        android:text="源4"
+        android:text=""
         android:textColor="#ffffff"
         android:visibility="invisible"
         />

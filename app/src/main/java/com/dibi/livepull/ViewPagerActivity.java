@@ -169,7 +169,8 @@ public class ViewPagerActivity extends AppCompatActivity {
 //        Request request = new Request.Builder().url("http://192.168.0.131:8090/latui/getAll").build();
 //        Request request = new Request.Builder().url("http://gaolatui.kfcit.com/latui/getAll?i=1").build();
 //        Request request = new Request.Builder().url("http://192.168.199.131:8090/latui/defaultApi").build();
-        Request request = new Request.Builder().url(GlobalContants.GetAll_1).build();
+//        Log.e("域名11--",GlobalContants.GetAll_1);
+        Request request = new Request.Builder().url(GlobalContants.SERVER_URL+"/latui/getAll?i=1").build();
         Call call = okHttpClient.newCall(request);
         call.enqueue(new Callback() {
             @Override
@@ -208,21 +209,56 @@ public class ViewPagerActivity extends AppCompatActivity {
                                 tv_num2.setVisibility(View.GONE);
                                 tv_num3.setVisibility(View.GONE);
                                 tv_num4.setVisibility(View.GONE);
+                                if(allUrlBean.getData().get(0)!=null&&allUrlBean.getData().get(0).size()>0){
+                                    tv_num1.setText(allUrlBean.getData().get(0).get(0).getGName());
+                                }
+
                             }else if(allUrlBean.getData().size()==2){
                                 tv_num1.setVisibility(View.VISIBLE);
                                 tv_num2.setVisibility(View.VISIBLE);
                                 tv_num3.setVisibility(View.GONE);
                                 tv_num4.setVisibility(View.GONE);
+                                if(allUrlBean.getData().get(0)!=null&&allUrlBean.getData().get(0).size()>0){
+                                    tv_num1.setText(allUrlBean.getData().get(0).get(0).getGName());
+                                }
+                                if(allUrlBean.getData().get(1)!=null&&allUrlBean.getData().get(1).size()>0){
+                                    tv_num2.setText(allUrlBean.getData().get(1).get(0).getGName());
+                                }
+
                             }else if(allUrlBean.getData().size()==3){
                                 tv_num1.setVisibility(View.VISIBLE);
                                 tv_num2.setVisibility(View.VISIBLE);
                                 tv_num3.setVisibility(View.VISIBLE);
                                 tv_num4.setVisibility(View.GONE);
+                                if(allUrlBean.getData().get(0)!=null&&allUrlBean.getData().get(0).size()>0){
+                                    tv_num1.setText(allUrlBean.getData().get(0).get(0).getGName());
+                                }
+                                if(allUrlBean.getData().get(1)!=null&&allUrlBean.getData().get(1).size()>0){
+                                    tv_num2.setText(allUrlBean.getData().get(1).get(0).getGName());
+                                }
+                                if(allUrlBean.getData().get(2)!=null&&allUrlBean.getData().get(2).size()>0){
+                                    tv_num3.setText(allUrlBean.getData().get(2).get(0).getGName());
+                                }
+
+
                             }else if(allUrlBean.getData().size()==4){
                                 tv_num1.setVisibility(View.VISIBLE);
                                 tv_num2.setVisibility(View.VISIBLE);
                                 tv_num3.setVisibility(View.VISIBLE);
                                 tv_num4.setVisibility(View.VISIBLE);
+                                if(allUrlBean.getData().get(0)!=null&&allUrlBean.getData().get(0).size()>0){
+                                    tv_num1.setText(allUrlBean.getData().get(0).get(0).getGName());
+                                }
+                                if(allUrlBean.getData().get(1)!=null&&allUrlBean.getData().get(1).size()>0){
+                                    tv_num2.setText(allUrlBean.getData().get(1).get(0).getGName());
+                                }
+                                if(allUrlBean.getData().get(2)!=null&&allUrlBean.getData().get(2).size()>0){
+                                    tv_num3.setText(allUrlBean.getData().get(2).get(0).getGName());
+                                }
+                                if(allUrlBean.getData().get(3)!=null&&allUrlBean.getData().get(3).size()>0){
+                                    tv_num4.setText(allUrlBean.getData().get(3).get(0).getGName());
+                                }
+
                             }
                         }
                     }
@@ -461,6 +497,7 @@ public class ViewPagerActivity extends AppCompatActivity {
                     tv_num3.setVisibility(View.VISIBLE);
                     tv_num4.setVisibility(View.VISIBLE);
                     GlobalContants.SERVER_URL = et_yuming.getText().toString().trim();
+                    Log.e("域名--",GlobalContants.SERVER_URL);
                     okhttpGetAllId1();
 
                 }

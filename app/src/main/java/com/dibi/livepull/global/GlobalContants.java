@@ -12,15 +12,15 @@ public class GlobalContants {
 //    public static final String SERVER_URL ="http://192.168.0.131:8090";
 
     //
-    public static final String Default_Api = SERVER_URL + "/latui/defaultApi";
+    public static  String Default_Api = SERVER_URL + "/latui/defaultApi";
     //
-    public static final String Second_Api = SERVER_URL + "/latui/secondApi";
+    public static  String Second_Api = SERVER_URL + "/latui/secondApi";
 
-    public static final String GetAll_1 = SERVER_URL + "/latui/getAll?i=1";
+    public static  String GetAll_1 = SERVER_URL + "/latui/getAll?i=1";
 
-    public static final String AddPage = SERVER_URL + "/latui/addPage";
+    public static  String AddPage = SERVER_URL + "/latui/addPage";
 
-    public static final String GetAll = SERVER_URL + "/latui/getAll";
+    public static  String GetAll = SERVER_URL + "/latui/getAll";
 
 
 
