@@ -7,9 +7,9 @@ package com.dibi.livepull.global;
 public class GlobalContants {
 
     //正式的服务器
-    public static  String SERVER_URL ="http://gaolatui.kfcit.com";
+//    public static  String SERVER_URL ="http://gaolatui.kfcit.com";
     //测试服务器
-//    public static final String SERVER_URL ="http://192.168.0.131:8090";
+    public static  String SERVER_URL ="http://192.168.0.132:8090";
 
     //
     public static  String Default_Api = SERVER_URL + "/latui/defaultApi";

@@ -2,8 +2,8 @@ package com.dibi.livepull;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
@@ -32,7 +32,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class ViewPagerActivity extends AppCompatActivity {
+public class ViewPager20180911Activity extends AppCompatActivity {
 
     private static final String TAG = "ViewPagerActivity" ;
     private AllUrlBean allUrlBean;
@@ -170,7 +170,7 @@ public class ViewPagerActivity extends AppCompatActivity {
      * 请求首页默认接口
      */
     private void okhttpGetAllId1() {
-        LoadingDialog.showDialogForLoading(ViewPagerActivity.this);
+        LoadingDialog.showDialogForLoading(ViewPager20180911Activity.this);
         OkHttpClient okHttpClient = new OkHttpClient();
 
 //        Request request = new Request.Builder().url("http://192.168.0.131:8090/latui/getAll").build();
@@ -187,7 +187,7 @@ public class ViewPagerActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         LoadingDialog.cancelDialogForLoading();
-                        Toast.makeText(ViewPagerActivity.this,"错误"+e,Toast.LENGTH_LONG).show();
+                        Toast.makeText(ViewPager20180911Activity.this,"错误"+e,Toast.LENGTH_LONG).show();
                     }
                 });
             }
@@ -376,7 +376,7 @@ public class ViewPagerActivity extends AppCompatActivity {
      * @param parames
      */
     private void okhttpPost(String parames) {
-        LoadingDialog.showDialogForLoading(ViewPagerActivity.this);
+        LoadingDialog.showDialogForLoading(ViewPager20180911Activity.this);
         Log.e("请求参数拼接--",parames);
         OkHttpClient okHttpClient = new OkHttpClient();
         //表单---此处没有添加什么头信息
@@ -398,7 +398,7 @@ public class ViewPagerActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         LoadingDialog.cancelDialogForLoading();
-                        Toast.makeText(ViewPagerActivity.this,"错误"+e,Toast.LENGTH_LONG).show();
+                        Toast.makeText(ViewPager20180911Activity.this,"错误"+e,Toast.LENGTH_LONG).show();
                     }
                 });
             }
@@ -424,7 +424,7 @@ public class ViewPagerActivity extends AppCompatActivity {
      * 请求首页默认接口
      */
     private void okhttpGetAll() {
-        LoadingDialog.showDialogForLoading(ViewPagerActivity.this);
+        LoadingDialog.showDialogForLoading(ViewPager20180911Activity.this);
         OkHttpClient okHttpClient = new OkHttpClient();
 
 //        Request request = new Request.Builder().url("http://192.168.0.131:8090/latui/getAll").build();
@@ -439,7 +439,7 @@ public class ViewPagerActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         LoadingDialog.cancelDialogForLoading();
-                        Toast.makeText(ViewPagerActivity.this,"错误"+e,Toast.LENGTH_LONG).show();
+                        Toast.makeText(ViewPager20180911Activity.this,"错误"+e,Toast.LENGTH_LONG).show();
                     }
                 });
             }
@@ -464,7 +464,7 @@ public class ViewPagerActivity extends AppCompatActivity {
 //                            vp.setAdapter(new FragmentVPAdapter(getSupportFragmentManager(), (ArrayList<TestFm>) fragmentList));
 //                            vp.setCurrentItem(0);
 
-                            startActivity(new Intent(ViewPagerActivity.this,ViewPager1Activity.class));
+                            startActivity(new Intent(ViewPager20180911Activity.this,ViewPager1Activity.class));
                             finish();
                         }
                     }
@@ -495,7 +495,7 @@ public class ViewPagerActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(et_yuming.getText().toString().trim().equals("")){
-                    Toast.makeText(ViewPagerActivity.this,"域名不能为空哦",Toast.LENGTH_LONG).show();
+                    Toast.makeText(ViewPager20180911Activity.this,"域名不能为空哦",Toast.LENGTH_LONG).show();
                 }else {
                     niubiDialog1.dismiss();
                     tv_add_video_url.setVisibility(View.VISIBLE);
@@ -525,7 +525,7 @@ public class ViewPagerActivity extends AppCompatActivity {
      */
     private void okhttpGetToken() {
         // LoadingDialog.showDialogForLoading(ViewPagerActivity.this);
-        LoadingDialog.showDialogForLoading(ViewPagerActivity.this);
+        LoadingDialog.showDialogForLoading(ViewPager20180911Activity.this);
         OkHttpClient okHttpClient = new OkHttpClient();
         Log.e("-------", token);
 //        Request request = new Request.Builder().url("http://192.168.0.131:8090/latui/getAll").build();
@@ -540,7 +540,7 @@ public class ViewPagerActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         LoadingDialog.cancelDialogForLoading();
-                        Toast.makeText(ViewPagerActivity.this,"错误"+e,Toast.LENGTH_LONG).show();
+                        Toast.makeText(ViewPager20180911Activity.this,"错误"+e,Toast.LENGTH_LONG).show();
                     }
                 });
             }

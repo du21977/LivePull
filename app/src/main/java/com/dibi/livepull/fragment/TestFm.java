@@ -165,9 +165,6 @@ public class TestFm extends Fragment{
 					list.get(0)[0].setVolume(20.0f,20.0f);
 					list.get(1)[0].setVolume(0.0f,0.0f);
 					list.get(2)[0].setVolume(0.0f,0.0f);
-
-
-
 				}
 			}));
 
