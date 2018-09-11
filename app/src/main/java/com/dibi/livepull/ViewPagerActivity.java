@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dibi.livepull.Manager.OkHttp3Manager;
 import com.dibi.livepull.bean.AllUrlBean;
 import com.dibi.livepull.bean.TokenBean;
 import com.dibi.livepull.dialog.LoadingDialog;
@@ -547,11 +548,39 @@ public class ViewPagerActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                String result = response.body().string();
+                final String result = response.body().string();
                 Log.e("-------", result);
-                TokenBean tokenBean = new Gson().fromJson(result,TokenBean.class);
-                okhttpGetAllId1();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        LoadingDialog.cancelDialogForLoading();
+                        TokenBean tokenBean = new Gson().fromJson(result,TokenBean.class);
+                        okhttpGetAllId1();
+                    }
+                });
+
             }
         });
+    }
+
+    private void okhttpGetToken1() {
+
+        OkHttp3Manager.getAsync(ViewPagerActivity.this, "", new OkHttp3Manager.DataCallBack() {
+            @Override
+            public void requestFailure(Request request, IOException e) {
+
+            }
+
+            @Override
+            public void requestFailureResCode(int responsecode) {
+
+            }
+
+            @Override
+            public void requestSuccess(String result) throws Exception {
+
+            }
+        });
+
     }
 }
