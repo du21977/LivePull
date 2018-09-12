@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 
+import com.dibi.livepull.global.GlobalContants;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -69,7 +70,7 @@ public class OkHttp3Manager {
     	//不用管cookie
     	//mClient = new OkHttpClient();
 
-        /*
+
         //管理cookie,登录持久化
     	final PersistentCookieStore cookieStore = new PersistentCookieStore(ctx);
         mClient = new OkHttpClient.Builder().cookieJar(new CookieJar() {
@@ -93,12 +94,13 @@ public class OkHttp3Manager {
             }
         	
 		}).build();
-		*/
+
 
 
         /**
          *  //管理cookie,登录持久化----cookie存入本地---退出后cookie依然存在
          */
+        /*
         final SharedPreferences sp = ctx.getSharedPreferences("myCookie",Context.MODE_PRIVATE);
 
         mClient=new OkHttpClient.Builder()
@@ -108,7 +110,7 @@ public class OkHttp3Manager {
                     @Override
                     public void saveFromResponse(HttpUrl url, List<Cookie> cookies) {
                         cookieStore.put(url, cookies);
-                        cookieStore.put(HttpUrl.parse("http://blockchain.cubelive.cn/app/user/register/step1"), cookies);
+                        cookieStore.put(HttpUrl.parse(GlobalContants.SERVER_URL+"/latui/user/checkUser?token=" +GlobalContants.Token), cookies);
                         for(Cookie cookie:cookies){
                             Log.e("cookie Name: ",cookie.name());
                             Log.e("cookie Value:",cookie.value());
@@ -142,7 +144,7 @@ public class OkHttp3Manager {
                         return cookies != null ? cookies : new ArrayList<Cookie>();
                     }
                 })
-                .build();
+                .build();*/
 
         /*
          //管理cookie,登录持久化----cookie存入内存---退出后cookie在内存中消失

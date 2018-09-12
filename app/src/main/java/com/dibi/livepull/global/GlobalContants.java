@@ -11,6 +11,8 @@ public class GlobalContants {
     //测试服务器
     public static  String SERVER_URL ="http://192.168.0.132:8090";
 
+    public static  String Token ="AAAAA";
+
     //
     public static  String Default_Api = SERVER_URL + "/latui/defaultApi";
     //

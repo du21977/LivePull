@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -56,6 +57,8 @@ public class ViewPagerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //去掉Activity上面的状态栏
+        getWindow().setFlags(WindowManager.LayoutParams. FLAG_FULLSCREEN , WindowManager.LayoutParams. FLAG_FULLSCREEN);
         setContentView(R.layout.activity_view_pager);
         vp = (NoPreloadViewPager) findViewById(R.id.viewPager);
         tv_num = (TextView) findViewById(R.id.tv_num);
@@ -122,7 +125,17 @@ public class ViewPagerActivity extends AppCompatActivity {
 
 
         //弹出对话框配置服务器地址
-        niubiAlertDialog11();
+//        niubiAlertDialog11();
+
+        TelephonyManager TelephonyMgr = (TelephonyManager)getSystemService(TELEPHONY_SERVICE);
+        String szImei = TelephonyMgr.getDeviceId();
+
+        GlobalContants.Token = szImei;
+        token = GlobalContants.SERVER_URL+"/latui/user/checkUser?token=" +GlobalContants.Token;
+//                    okhttpGetToken();
+        okhttpGetToken1(token);
+
+
 
         tv_num1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -507,12 +520,13 @@ public class ViewPagerActivity extends AppCompatActivity {
                     GlobalContants.SERVER_URL = et_yuming.getText().toString().trim();
                     Log.e("域名--",GlobalContants.SERVER_URL);
 
-                    TelephonyManager TelephonyMgr = (TelephonyManager)getSystemService(TELEPHONY_SERVICE);
-                    String szImei = TelephonyMgr.getDeviceId();
-
-                    token = GlobalContants.SERVER_URL+"/latui/user/checkUser?token=" +szImei;
-                    okhttpGetToken();
-
+//                    TelephonyManager TelephonyMgr = (TelephonyManager)getSystemService(TELEPHONY_SERVICE);
+//                    String szImei = TelephonyMgr.getDeviceId();
+//
+//                    GlobalContants.Token = szImei;
+//                    token = GlobalContants.SERVER_URL+"/latui/user/checkUser?token=" +GlobalContants.Token;
+////                    okhttpGetToken();
+//                    okhttpGetToken1(token);
 
                 }
             }
@@ -563,24 +577,139 @@ public class ViewPagerActivity extends AppCompatActivity {
         });
     }
 
-    private void okhttpGetToken1() {
-
-        OkHttp3Manager.getAsync(ViewPagerActivity.this, "", new OkHttp3Manager.DataCallBack() {
+    private void okhttpGetToken1(String token1) {
+        LoadingDialog.showDialogForLoading(ViewPagerActivity.this);
+        OkHttp3Manager.getAsync(ViewPagerActivity.this, token1, new OkHttp3Manager.DataCallBack() {
             @Override
-            public void requestFailure(Request request, IOException e) {
-
+            public void requestFailure(Request request, final IOException e) {
+                Log.e("-------1111-----",e+"");
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        LoadingDialog.cancelDialogForLoading();
+                        Toast.makeText(ViewPagerActivity.this,"错误"+e,Toast.LENGTH_LONG).show();
+                    }
+                });
             }
 
             @Override
-            public void requestFailureResCode(int responsecode) {
+            public void requestFailureResCode(final int responsecode) {
+                Log.e("-------1111-----",responsecode+"");
+
+                        LoadingDialog.cancelDialogForLoading();
+                        Toast.makeText(ViewPagerActivity.this,"错误码"+responsecode,Toast.LENGTH_LONG).show();
 
             }
 
             @Override
             public void requestSuccess(String result) throws Exception {
-
+                Log.e("-------1111-----",result);
+                LoadingDialog.cancelDialogForLoading();
+                TokenBean tokenBean = new Gson().fromJson(result,TokenBean.class);
+                okhttpGetAll_1();
             }
         });
 
     }
+
+    private void okhttpGetAll_1() {
+        LoadingDialog.showDialogForLoading(ViewPagerActivity.this);
+        OkHttp3Manager.getAsync(ViewPagerActivity.this, GlobalContants.SERVER_URL+"/latui/getAll?i=1", new OkHttp3Manager.DataCallBack() {
+            @Override
+            public void requestFailure(Request request, IOException e) {
+                Log.e("-------1111-----",e+"");
+                LoadingDialog.cancelDialogForLoading();
+                Toast.makeText(ViewPagerActivity.this,"错误"+e,Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void requestFailureResCode(int responsecode) {
+                Log.e("-------1111-----",responsecode+"");
+                LoadingDialog.cancelDialogForLoading();
+                Toast.makeText(ViewPagerActivity.this,"错误码"+responsecode,Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void requestSuccess(String result1) throws Exception {
+                Log.e("-------1111-----",result1);
+                final String result = result1;
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        LoadingDialog.cancelDialogForLoading();
+                        Log.e(TAG,result);
+                        allUrlBean = new Gson().fromJson(result,AllUrlBean.class);
+                        if (allUrlBean !=null&& allUrlBean.getData().size()>0){
+//                            ThreePull0831Activity.MyAdapter myAdapter = new ThreePull0831Activity.MyAdapter();
+//                            mRecyclerView.setAdapter(myAdapter);
+                            fragmentList = new ArrayList<TestFm>();
+                            for(int i=0;i<allUrlBean.getData().size();i++){
+                                TestFm testFm = new TestFm().newInstance(result, i);
+                                fragmentList.add(testFm);
+                            }
+                            vp.setAdapter(new FragmentVPAdapter(getSupportFragmentManager(), (ArrayList<TestFm>) fragmentList));
+
+                            if(allUrlBean.getData().size()==1){
+                                tv_num1.setVisibility(View.VISIBLE);
+                                tv_num2.setVisibility(View.GONE);
+                                tv_num3.setVisibility(View.GONE);
+                                tv_num4.setVisibility(View.GONE);
+                                if(allUrlBean.getData().get(0)!=null&&allUrlBean.getData().get(0).size()>0){
+                                    tv_num1.setText(allUrlBean.getData().get(0).get(0).getGName());
+                                }
+
+                            }else if(allUrlBean.getData().size()==2){
+                                tv_num1.setVisibility(View.VISIBLE);
+                                tv_num2.setVisibility(View.VISIBLE);
+                                tv_num3.setVisibility(View.GONE);
+                                tv_num4.setVisibility(View.GONE);
+                                if(allUrlBean.getData().get(0)!=null&&allUrlBean.getData().get(0).size()>0){
+                                    tv_num1.setText(allUrlBean.getData().get(0).get(0).getGName());
+                                }
+                                if(allUrlBean.getData().get(1)!=null&&allUrlBean.getData().get(1).size()>0){
+                                    tv_num2.setText(allUrlBean.getData().get(1).get(0).getGName());
+                                }
+
+                            }else if(allUrlBean.getData().size()==3){
+                                tv_num1.setVisibility(View.VISIBLE);
+                                tv_num2.setVisibility(View.VISIBLE);
+                                tv_num3.setVisibility(View.VISIBLE);
+                                tv_num4.setVisibility(View.GONE);
+                                if(allUrlBean.getData().get(0)!=null&&allUrlBean.getData().get(0).size()>0){
+                                    tv_num1.setText(allUrlBean.getData().get(0).get(0).getGName());
+                                }
+                                if(allUrlBean.getData().get(1)!=null&&allUrlBean.getData().get(1).size()>0){
+                                    tv_num2.setText(allUrlBean.getData().get(1).get(0).getGName());
+                                }
+                                if(allUrlBean.getData().get(2)!=null&&allUrlBean.getData().get(2).size()>0){
+                                    tv_num3.setText(allUrlBean.getData().get(2).get(0).getGName());
+                                }
+
+
+                            }else if(allUrlBean.getData().size()>=4){
+                                tv_num1.setVisibility(View.VISIBLE);
+                                tv_num2.setVisibility(View.VISIBLE);
+                                tv_num3.setVisibility(View.VISIBLE);
+                                tv_num4.setVisibility(View.VISIBLE);
+                                if(allUrlBean.getData().get(0)!=null&&allUrlBean.getData().get(0).size()>0){
+                                    tv_num1.setText(allUrlBean.getData().get(0).get(0).getGName());
+                                }
+                                if(allUrlBean.getData().get(1)!=null&&allUrlBean.getData().get(1).size()>0){
+                                    tv_num2.setText(allUrlBean.getData().get(1).get(0).getGName());
+                                }
+                                if(allUrlBean.getData().get(2)!=null&&allUrlBean.getData().get(2).size()>0){
+                                    tv_num3.setText(allUrlBean.getData().get(2).get(0).getGName());
+                                }
+                                if(allUrlBean.getData().get(3)!=null&&allUrlBean.getData().get(3).size()>0){
+                                    tv_num4.setText(allUrlBean.getData().get(3).get(0).getGName());
+                                }
+
+                            }
+                        }
+                    }
+                });
+            }
+        });
+    }
+
 }

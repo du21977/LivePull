@@ -34,7 +34,7 @@
         android:paddingLeft="15dp"
         android:paddingBottom="15dp"
         android:textSize="15sp"
-        android:visibility="invisible"
+        android:visibility="visible"
         />
 
     <TextView
