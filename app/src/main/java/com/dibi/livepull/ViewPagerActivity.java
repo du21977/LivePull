@@ -52,6 +52,8 @@ public class ViewPagerActivity extends AppCompatActivity {
     TextView tv_num3;
     TextView tv_num4;
 
+    TextView tv_setup;
+
     private String token;
 
     @Override
@@ -66,6 +68,7 @@ public class ViewPagerActivity extends AppCompatActivity {
         tv_num2 = (TextView) findViewById(R.id.tv_num2);
         tv_num3 = (TextView) findViewById(R.id.tv_num3);
         tv_num4 = (TextView) findViewById(R.id.tv_num4);
+        tv_setup = (TextView) findViewById(R.id.tv_setup);
 
 
 
@@ -123,13 +126,20 @@ public class ViewPagerActivity extends AppCompatActivity {
             }
         });
 
+        tv_setup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Toast.makeText(ViewPagerActivity.this,"设置",Toast.LENGTH_LONG).show();
+                setupDialog();
+            }
+        });
+
 
         //弹出对话框配置服务器地址
 //        niubiAlertDialog11();
 
         TelephonyManager TelephonyMgr = (TelephonyManager)getSystemService(TELEPHONY_SERVICE);
         String szImei = TelephonyMgr.getDeviceId();
-
         GlobalContants.Token = szImei;
         token = GlobalContants.SERVER_URL+"/latui/user/checkUser?token=" +GlobalContants.Token;
 //                    okhttpGetToken();
@@ -569,6 +579,9 @@ public class ViewPagerActivity extends AppCompatActivity {
                     public void run() {
                         LoadingDialog.cancelDialogForLoading();
                         TokenBean tokenBean = new Gson().fromJson(result,TokenBean.class);
+                        if(tokenBean!=null){
+                         GlobalContants.BackToken  =  tokenBean.getData();
+                        }
                         okhttpGetAllId1();
                     }
                 });
@@ -606,6 +619,9 @@ public class ViewPagerActivity extends AppCompatActivity {
                 Log.e("-------1111-----",result);
                 LoadingDialog.cancelDialogForLoading();
                 TokenBean tokenBean = new Gson().fromJson(result,TokenBean.class);
+                if(tokenBean!=null){
+                    GlobalContants.BackToken  =  tokenBean.getData();
+                }
                 okhttpGetAll_1();
             }
         });
@@ -710,6 +726,43 @@ public class ViewPagerActivity extends AppCompatActivity {
                 });
             }
         });
+    }
+
+
+
+    /**
+     * 万能的Dialog-----设置
+     */
+    MyAlertDialog setupDialog;
+    private void setupDialog() {
+        setupDialog = new MyAlertDialog.Builder(this)
+                .setContentView(R.layout.alertdialog_setup)
+                .setCancelable(true)
+                .formLeft(true)
+                .fullHeight()
+                .show();
+        //.formBottom(true).fullWidth().show();
+//        Button button1 = niubiDialog.getView(R.id.btn_common_1);
+//        Button button2 = niubiDialog.getView(R.id.btn_common_2);
+
+//        final TextView et_yuming = setupDialog.getView(R.id.tv_webview);
+
+
+
+        setupDialog.setOnclickListener(R.id.tv_webview, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                setupDialog.dismiss();
+                LoadingDialog.showDialogForLoading(ViewPagerActivity.this);
+                startActivity(new Intent(ViewPagerActivity.this,WebViewActivity.class));
+                LoadingDialog.cancelDialogForLoading();
+                finish();
+
+
+            }
+        });
+
     }
 
 }

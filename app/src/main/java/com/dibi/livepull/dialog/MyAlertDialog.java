@@ -145,6 +145,12 @@ public class MyAlertDialog extends Dialog {
             return this;
         }
 
+        // 配置一些万能的参数
+        public Builder fullHeight(){
+            P.mHeight = ViewGroup.LayoutParams.MATCH_PARENT;
+            return this;
+        }
+
         /**
          * 从底部弹出
          * @param isAnimation 是否有动画
@@ -155,6 +161,19 @@ public class MyAlertDialog extends Dialog {
                 P.mAnimations = R.style.dialog_from_bottom_anim;
             }
             P.mGravity = Gravity.BOTTOM;
+            return this;
+        }
+
+        /**
+         * 从左边弹出
+         * @param isAnimation 是否有动画
+         * @return
+         */
+        public Builder formLeft(boolean isAnimation){
+            if(isAnimation){
+                P.mAnimations = R.style.dialog_from_left_anim;
+            }
+            P.mGravity = Gravity.LEFT;
             return this;
         }
 

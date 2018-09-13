@@ -49,10 +49,11 @@
             android:name=".ViewPager1Activity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="landscape" />
-        <activity android:name=".SplashActivity"
+        <activity
+            android:name=".SplashActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="landscape"
-            ></activity>
+            android:screenOrientation="landscape" />
+        <activity android:name=".WebViewActivity"></activity>
     </application>
 
 </manifest>
