@@ -6,6 +6,7 @@
     android:layout_marginLeft="30dp"
     android:layout_marginRight="30dp"
     android:background="#1E1E28"
+    android:gravity="center"
     >
 
     <EditText
@@ -26,14 +27,14 @@
 
         />
 
-
     <TextView
-        android:id="@+id/tv_webview"
+        android:id="@+id/tv_yuming"
         android:layout_width="250dp"
         android:layout_height="40dp"
+        android:background="@drawable/app_button_style_2"
         android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        android:text="修改地址"
+        android:layout_marginBottom="5dp"
+        android:text="修改域名"
         android:textSize="15sp"
         android:textColor="#ffffff"
         android:gravity="center"
@@ -41,6 +42,24 @@
         android:layout_marginRight="10dp"
         android:layout_gravity="center_horizontal"
         />
+
+    <TextView
+        android:id="@+id/tv_webview"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:background="@drawable/app_button_style_2"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="2dp"
+        android:text="修改视频源"
+        android:textSize="15sp"
+        android:textColor="#ffffff"
+        android:gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_gravity="center_horizontal"
+        />
+
+
 
     <TextView
         android:id="@+id/tv_dialog_yuming"
@@ -56,6 +75,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_gravity="center_horizontal"
+        android:visibility="gone"
         />
 
 

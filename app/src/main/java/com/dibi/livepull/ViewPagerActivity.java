@@ -502,10 +502,10 @@ public class ViewPagerActivity extends AppCompatActivity {
      * 万能的Dialog-----配置域名
      */
     MyAlertDialog niubiDialog1;
-    private void niubiAlertDialog11() {
+    private void yumingDialog11() {
         niubiDialog1 = new MyAlertDialog.Builder(this)
                 .setContentView(R.layout.alertdialog_yuming)
-                .setCancelable(false)
+                .setCancelable(true)
                 .show();
         //.formBottom(true).fullWidth().show();
 //        Button button1 = niubiDialog.getView(R.id.btn_common_1);
@@ -537,6 +537,8 @@ public class ViewPagerActivity extends AppCompatActivity {
 //                    token = GlobalContants.SERVER_URL+"/latui/user/checkUser?token=" +GlobalContants.Token;
 ////                    okhttpGetToken();
 //                    okhttpGetToken1(token);
+                    startActivity(new Intent(ViewPagerActivity.this,ViewPagerActivity.class));
+                    finish();
 
                 }
             }
@@ -758,6 +760,17 @@ public class ViewPagerActivity extends AppCompatActivity {
                 startActivity(new Intent(ViewPagerActivity.this,WebViewActivity.class));
                 LoadingDialog.cancelDialogForLoading();
                 finish();
+
+
+            }
+        });
+
+        setupDialog.setOnclickListener(R.id.tv_yuming, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                setupDialog.dismiss();
+                yumingDialog11();
 
 
             }
