@@ -6,7 +6,7 @@
     android:layout_marginLeft="30dp"
     android:layout_marginRight="30dp"
     android:background="#1E1E28"
-    android:gravity="center"
+
     >
 
     <EditText
@@ -32,7 +32,7 @@
         android:layout_width="250dp"
         android:layout_height="40dp"
         android:background="@drawable/app_button_style_2"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="50dp"
         android:layout_marginBottom="5dp"
         android:text="修改域名"
         android:textSize="15sp"
@@ -51,6 +51,22 @@
         android:layout_marginTop="20dp"
         android:layout_marginBottom="2dp"
         android:text="修改视频源"
+        android:textSize="15sp"
+        android:textColor="#ffffff"
+        android:gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_gravity="center_horizontal"
+        />
+
+    <TextView
+        android:id="@+id/tv_dizhi"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:background="@drawable/app_button_style_2"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="2dp"
+        android:text="查看当前地址"
         android:textSize="15sp"
         android:textColor="#ffffff"
         android:gravity="center"

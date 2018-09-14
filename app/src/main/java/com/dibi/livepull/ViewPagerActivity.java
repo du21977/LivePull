@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -53,6 +54,7 @@ public class ViewPagerActivity extends AppCompatActivity {
     TextView tv_num4;
 
     TextView tv_setup;
+    ImageView iv_setup;
 
     private String token;
 
@@ -69,6 +71,7 @@ public class ViewPagerActivity extends AppCompatActivity {
         tv_num3 = (TextView) findViewById(R.id.tv_num3);
         tv_num4 = (TextView) findViewById(R.id.tv_num4);
         tv_setup = (TextView) findViewById(R.id.tv_setup);
+        iv_setup = (ImageView) findViewById(R.id.iv_setup);
 
 
 
@@ -126,7 +129,7 @@ public class ViewPagerActivity extends AppCompatActivity {
             }
         });
 
-        tv_setup.setOnClickListener(new View.OnClickListener() {
+        iv_setup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Toast.makeText(ViewPagerActivity.this,"设置",Toast.LENGTH_LONG).show();
@@ -771,8 +774,15 @@ public class ViewPagerActivity extends AppCompatActivity {
 
                 setupDialog.dismiss();
                 yumingDialog11();
+            }
+        });
 
+        setupDialog.setOnclickListener(R.id.tv_dizhi, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                setupDialog.dismiss();
+                niubiAlertDialog();
             }
         });
 
