@@ -32,8 +32,8 @@
 
     <ImageView
         android:id="@+id/iv_setup"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:background="@mipmap/setup"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"

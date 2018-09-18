@@ -228,6 +228,10 @@ public class ViewPagerActivity extends AppCompatActivity {
                         LoadingDialog.cancelDialogForLoading();
                         Log.e(TAG,result);
                         allUrlBean = new Gson().fromJson(result,AllUrlBean.class);
+                        if(allUrlBean ==null|| allUrlBean.getData().size()==0){
+                            Toast.makeText(ViewPagerActivity.this,"没有视频哦",Toast.LENGTH_LONG).show();
+                            return;
+                        }
                         if (allUrlBean !=null&& allUrlBean.getData().size()>0){
 //                            ThreePull0831Activity.MyAdapter myAdapter = new ThreePull0831Activity.MyAdapter();
 //                            mRecyclerView.setAdapter(myAdapter);
@@ -620,7 +624,7 @@ public class ViewPagerActivity extends AppCompatActivity {
             }
 
             @Override
-            public void requestSuccess(String result) throws Exception {
+                public void requestSuccess(String result) throws Exception {
                 Log.e("-------1111-----",result);
                 LoadingDialog.cancelDialogForLoading();
                 TokenBean tokenBean = new Gson().fromJson(result,TokenBean.class);
@@ -660,6 +664,14 @@ public class ViewPagerActivity extends AppCompatActivity {
                         LoadingDialog.cancelDialogForLoading();
                         Log.e(TAG,result);
                         allUrlBean = new Gson().fromJson(result,AllUrlBean.class);
+                        //Log.e(TAG+"--66--",result);
+                        if(allUrlBean.getData() ==null|| allUrlBean.getData().size()==0){
+                            Toast.makeText(ViewPagerActivity.this,"没有视频哦",Toast.LENGTH_LONG).show();
+                            Log.e("----------------","-----------");
+                            showNoDialog();
+                            return;
+                        }
+                        Log.e(TAG+"----",result);
                         if (allUrlBean !=null&& allUrlBean.getData().size()>0){
 //                            ThreePull0831Activity.MyAdapter myAdapter = new ThreePull0831Activity.MyAdapter();
 //                            mRecyclerView.setAdapter(myAdapter);
@@ -785,6 +797,35 @@ public class ViewPagerActivity extends AppCompatActivity {
                 niubiAlertDialog();
             }
         });
+
+    }
+
+
+    /**
+     * 万能的Dialog-----弹出无视频
+     */
+    MyAlertDialog showNoDialog;
+    private void showNoDialog() {
+        showNoDialog = new MyAlertDialog.Builder(this)
+                .setContentView(R.layout.alertdialog_no_url)
+                .setCancelable(true)
+                .show();
+        //.formBottom(true).fullWidth().show();
+//        Button button1 = niubiDialog.getView(R.id.btn_common_1);
+//        Button button2 = niubiDialog.getView(R.id.btn_common_2);
+
+//        final TextView et_yuming = setupDialog.getView(R.id.tv_webview);
+
+
+
+        showNoDialog.setOnclickListener(R.id.tv_dialog_ok, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showNoDialog.dismiss();
+            }
+        });
+
+
 
     }
 
