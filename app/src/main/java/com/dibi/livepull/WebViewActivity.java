@@ -45,6 +45,8 @@ public class WebViewActivity extends AppCompatActivity {
 //        String url = "http://gaolatui.kfcit.com/latui/list.html?id=748c5388e8674e50b02e3e5085fef597";
         String url = GlobalContants.SERVER_URL + "/latui/list.html?id="+GlobalContants.BackToken;
 
+//        String url = "http://www.baidu.com";
+
         Log.e("----------url",url);
         mWebView.setWebViewClient(new WebViewClient() {
 

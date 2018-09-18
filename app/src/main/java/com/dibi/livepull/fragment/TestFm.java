@@ -10,9 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dibi.livepull.R;
 import com.dibi.livepull.ThreePull0831Activity;
+import com.dibi.livepull.ViewPagerActivity;
 import com.dibi.livepull.bean.AllUrlBean;
 import com.dibi.livepull.view.MyIjkVideoView;
 import com.dibi.livepull.view.OnDoubleClickListener;
@@ -31,13 +33,20 @@ public class TestFm extends Fragment{
 	private AllUrlBean allUrlBean;
 
 	private RelativeLayout rl_item_total;
+
+	//有3个视频
 	private MyIjkVideoView[] myIjkVideoView_1;
 	private MyIjkVideoView[] myIjkVideoView_2;
 	private MyIjkVideoView[] myIjkVideoView_3;
+
+	//有4个视频
 	private MyIjkVideoView[] myIjkVideoView_41;
 	private MyIjkVideoView[] myIjkVideoView_42;
 	private MyIjkVideoView[] myIjkVideoView_43;
 	private MyIjkVideoView[] myIjkVideoView_4middle;
+
+	//只有1个视频
+	private MyIjkVideoView[] myIjkVideoView_11;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -75,6 +84,134 @@ public class TestFm extends Fragment{
 //		tv.setText(allUrlBean.getData().get(flag).get(0).getPath());
 
 		rl_item_total = view.findViewById(R.id.rl_item_total);
+		if(allUrlBean.getData().get(flag).size()==1){
+//			Toast.makeText(getActivity(),"为何只有一个视频",Toast.LENGTH_LONG).show();
+			// 1.添加左边的播放器
+			final RelativeLayout.LayoutParams   layoutParams_left = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
+			myIjkVideoView_11 = new MyIjkVideoView[]{new MyIjkVideoView(getActivity())};
+			myIjkVideoView_11[0].setBackgroundColor(Color.BLUE);
+			myIjkVideoView_11[0].setLayoutParams(layoutParams_left);
+			rl_item_total.addView(myIjkVideoView_11[0]);
+			String PULL_0 = allUrlBean.getData().get(flag).get(0).getPath();
+			myIjkVideoView_11[0].setVideoPath(PULL_0);
+			myIjkVideoView_11[0].start();
+
+		}
+		if(allUrlBean.getData().get(flag).size()==2){
+//			Toast.makeText(getActivity(),"为何只有一个视频",Toast.LENGTH_LONG).show();
+			final List<MyIjkVideoView[]> list = new ArrayList<MyIjkVideoView[]>() ;
+			//在这里搞事情
+			// 1.添加左边的播放器
+			final RelativeLayout.LayoutParams   layoutParams_left = new RelativeLayout.LayoutParams(dp2px(400), RelativeLayout.LayoutParams.MATCH_PARENT);
+			myIjkVideoView_1 = new MyIjkVideoView[]{new MyIjkVideoView(getActivity())};
+			myIjkVideoView_1[0].setBackgroundColor(Color.BLUE);
+			myIjkVideoView_1[0].setLayoutParams(layoutParams_left);
+
+			//2.添加右上角的播放器
+			final RelativeLayout.LayoutParams layoutParams_right_top = new RelativeLayout.LayoutParams(dp2px(200), dp2px(200));
+			layoutParams_right_top.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+			layoutParams_right_top.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+			myIjkVideoView_2 = new MyIjkVideoView[]{new MyIjkVideoView(getActivity())};
+			myIjkVideoView_2[0].setBackgroundColor(Color.BLACK);
+			myIjkVideoView_2[0].setLayoutParams(layoutParams_right_top);
+
+
+
+			//3.添加右下角的播放器
+			final RelativeLayout.LayoutParams layoutParams_right_bottom = new RelativeLayout.LayoutParams(dp2px(200), dp2px(200));
+			layoutParams_right_bottom.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+			layoutParams_right_bottom.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+			myIjkVideoView_3 = new MyIjkVideoView[]{new MyIjkVideoView(getActivity())};
+			myIjkVideoView_3[0].setBackgroundColor(Color.BLACK);
+			myIjkVideoView_3[0].setLayoutParams(layoutParams_right_bottom);
+
+			TextView textView1 = new TextView(getActivity());
+			TextView textView2 = new TextView(getActivity());
+			textView1.setLayoutParams(layoutParams_right_top);
+			textView2.setLayoutParams(layoutParams_right_bottom);
+
+			rl_item_total.addView(myIjkVideoView_1[0]);
+			rl_item_total.addView(myIjkVideoView_2[0]);
+			rl_item_total.addView(myIjkVideoView_3[0]);
+			rl_item_total.addView(textView1);
+			rl_item_total.addView(textView2);
+
+			list.add(myIjkVideoView_1);
+			list.add(myIjkVideoView_2);
+			list.add(myIjkVideoView_3);
+
+
+//        String PULL_0 = Setup1Activity.pull__0;
+//        String PULL_1 = Setup1Activity.pull__1;
+//        String PULL_2 = Setup1Activity.pull__2;
+			String PULL_0 = allUrlBean.getData().get(flag).get(0).getPath();
+			String PULL_1 = allUrlBean.getData().get(flag).get(1).getPath();
+			String PULL_2 = allUrlBean.getData().get(flag).get(1).getPath();
+			myIjkVideoView_1[0].setVideoPath(PULL_0);
+			myIjkVideoView_2[0].setVideoPath(PULL_1);
+			myIjkVideoView_3[0].setVideoPath(PULL_2);
+
+			myIjkVideoView_1[0].start();
+			myIjkVideoView_2[0].start();
+			myIjkVideoView_3[0].start();
+
+			myIjkVideoView_1[0].SetVolumeListener(new MyIjkVideoView.VolListener() {
+				@Override
+				public void setVol() {
+					myIjkVideoView_1[0].setVolume(20.0f,20.0f);
+				}
+			});
+			myIjkVideoView_2[0].SetVolumeListener(new MyIjkVideoView.VolListener() {
+				@Override
+				public void setVol() {
+					myIjkVideoView_2[0].setVolume(0.0f,0.0f);
+				}
+			});
+			myIjkVideoView_3[0].SetVolumeListener(new MyIjkVideoView.VolListener() {
+				@Override
+				public void setVol() {
+					myIjkVideoView_3[0].setVolume(0.0f,0.0f);
+				}
+			});
+			textView1.setOnTouchListener(new OnDoubleClickListener(new OnDoubleClickListener.DoubleClickCallback() {
+				@Override
+				public void onDoubleClick() {
+					//  Toast.makeText(ThreePull2Activity.this,"双击11",Toast.LENGTH_LONG).show();
+
+					MyIjkVideoView myIjkVideoView = new MyIjkVideoView(getActivity());
+					myIjkVideoView = list.get(0)[0];
+					list.get(0)[0] =list.get(1)[0];
+					list.get(1)[0] = myIjkVideoView;
+
+					list.get(0)[0].setLayoutParams(layoutParams_left);
+					list.get(1)[0].setLayoutParams(layoutParams_right_top);
+					list.get(0)[0].setVolume(20.0f,20.0f);
+					list.get(1)[0].setVolume(0.0f,0.0f);
+					list.get(2)[0].setVolume(0.0f,0.0f);
+				}
+			}));
+
+			textView2.setOnTouchListener(new OnDoubleClickListener(new OnDoubleClickListener.DoubleClickCallback() {
+				@Override
+				public void onDoubleClick() {
+					//  Toast.makeText(ThreePull2Activity.this,"双击22",Toast.LENGTH_LONG).show();
+					MyIjkVideoView myIjkVideoView = new MyIjkVideoView(getActivity());
+					myIjkVideoView = list.get(0)[0];
+					list.get(0)[0] =list.get(2)[0];
+					list.get(2)[0] = myIjkVideoView;
+
+					list.get(0)[0].setLayoutParams(layoutParams_left);
+					list.get(2)[0].setLayoutParams(layoutParams_right_bottom);
+					// mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 0, 1);
+					list.get(0)[0].setVolume(20.0f,20.0f);
+					list.get(1)[0].setVolume(0.0f,0.0f);
+					list.get(2)[0].setVolume(0.0f,0.0f);
+				}
+			}));
+
+			//添加查看地址
+
+		}
 		if(allUrlBean.getData().get(flag).size()==3){
 			final List<MyIjkVideoView[]> list = new ArrayList<MyIjkVideoView[]>() ;
 			//在这里搞事情
@@ -452,6 +589,9 @@ public class TestFm extends Fragment{
 		}
 		if(myIjkVideoView_4middle!=null){
 			myIjkVideoView_4middle[0].stopPlayback();
+		}
+		if(myIjkVideoView_11!=null){
+			myIjkVideoView_11[0].stopPlayback();
 		}
 
 	}

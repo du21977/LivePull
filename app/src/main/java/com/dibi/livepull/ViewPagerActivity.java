@@ -325,16 +325,35 @@ public class ViewPagerActivity extends AppCompatActivity {
         if (allUrlBean !=null&& allUrlBean.getData().size()>0){
             Log.e(TAG,allUrlBean.getData().get(currentPosition).size()+"");
             if(allUrlBean.getData().get(currentPosition).size()==3){
+                et_1.setVisibility(View.VISIBLE);
+                et_2.setVisibility(View.VISIBLE);
+                et_3.setVisibility(View.VISIBLE);
                 et_1.setText(allUrlBean.getData().get(currentPosition).get(0).getPath());
                 et_2.setText(allUrlBean.getData().get(currentPosition).get(1).getPath());
                 et_3.setText(allUrlBean.getData().get(currentPosition).get(2).getPath());
                 et_4.setVisibility(View.GONE);
             }else if(allUrlBean.getData().get(currentPosition).size()>=4){
+                et_1.setVisibility(View.VISIBLE);
+                et_2.setVisibility(View.VISIBLE);
+                et_3.setVisibility(View.VISIBLE);
                 et_1.setText(allUrlBean.getData().get(currentPosition).get(0).getPath());
                 et_2.setText(allUrlBean.getData().get(currentPosition).get(1).getPath());
                 et_3.setText(allUrlBean.getData().get(currentPosition).get(2).getPath());
                 et_4.setVisibility(View.VISIBLE);
                 et_4.setText(allUrlBean.getData().get(currentPosition).get(3).getPath());
+            }if(allUrlBean.getData().get(currentPosition).size()==2){
+                et_1.setVisibility(View.VISIBLE);
+                et_2.setVisibility(View.VISIBLE);
+                et_1.setText(allUrlBean.getData().get(currentPosition).get(0).getPath());
+                et_2.setText(allUrlBean.getData().get(currentPosition).get(1).getPath());
+                et_3.setVisibility(View.GONE);
+                et_4.setVisibility(View.GONE);
+            }if(allUrlBean.getData().get(currentPosition).size()==1){
+                et_1.setVisibility(View.VISIBLE);
+                et_1.setText(allUrlBean.getData().get(currentPosition).get(0).getPath());
+                et_4.setVisibility(View.GONE);
+                et_3.setVisibility(View.GONE);
+                et_2.setVisibility(View.GONE);
             }
         }
 
@@ -518,8 +537,8 @@ public class ViewPagerActivity extends AppCompatActivity {
 //        Button button1 = niubiDialog.getView(R.id.btn_common_1);
 //        Button button2 = niubiDialog.getView(R.id.btn_common_2);
 
-        final EditText et_yuming = niubiDialog1.getView(R.id.et_yuming);
-
+         final EditText et_yuming = niubiDialog1.getView(R.id.et_yuming);
+        et_yuming.setText(GlobalContants.SERVER_URL);
 
 
         niubiDialog1.setOnclickListener(R.id.tv_dialog_yuming, new View.OnClickListener() {
@@ -764,7 +783,8 @@ public class ViewPagerActivity extends AppCompatActivity {
 
 //        final TextView et_yuming = setupDialog.getView(R.id.tv_webview);
 
-
+//        EditText et_yuming = setupDialog.getView(R.id.et_yuming);
+//        et_yuming.setText(GlobalContants.SERVER_URL);
 
         setupDialog.setOnclickListener(R.id.tv_webview, new View.OnClickListener() {
             @Override
@@ -794,7 +814,15 @@ public class ViewPagerActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 setupDialog.dismiss();
-                niubiAlertDialog();
+                if(allUrlBean.getData() ==null|| allUrlBean.getData().size()==0){
+                    Toast.makeText(ViewPagerActivity.this,"没有视频哦",Toast.LENGTH_LONG).show();
+                    Log.e("----------------","-----------");
+                    showNoDialog();
+                }else {
+                    niubiAlertDialog();
+                }
+
+
             }
         });
 
@@ -822,6 +850,8 @@ public class ViewPagerActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 showNoDialog.dismiss();
+                startActivity(new Intent(ViewPagerActivity.this,WebViewActivity.class));
+                finish();
             }
         });
 
