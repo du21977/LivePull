@@ -675,7 +675,7 @@ public class ViewPagerActivity extends AppCompatActivity {
 
             @Override
             public void requestSuccess(String result1) throws Exception {
-                Log.e("-------1111-----",result1);
+                Log.e("-------我去-----",result1);
                 final String result = result1;
                 runOnUiThread(new Runnable() {
                     @Override
